@@ -1,6 +1,6 @@
 Initial Literature Review Log
 
-Researcher: [Your Name] Date: [Date of Completion] Proposed Topic Area: Turkish-Paragraph-SözelMantık
+Researcher: Elif Eslem ÖZkan Date: November 8 2025 Proposed Topic Area: Turkish-Paragraph-SözelMantık
 
 ### 1. Executive Synthesis & Recommendation
 
@@ -48,4 +48,5 @@ Key Findings & Quotations:
 * **Model Doğrulama Matrisi (Model Validation Matrix):** The researchers developed a **systematic evaluation matrix** based on learning outcomes and Bloom’s Taxonomy for classifying and measuring the quality of AI-generated questions.
 
 Personal Analysis & Relevance to LGS-LLM:
+
 This paper provides the **technical roadmap** for our LLM integration. It validates the decision to use LLMs and emphasizes that our initial efforts should heavily focus on **advanced prompt engineering**. The prompt should not simply ask for a question, but must specify the **LGS format, the topic, the exact cognitive level (e.g., Analysis of Sentence Structure), the required text length, and the logical parameters for the distractors**. The **evaluation matrix** developed by the authors is a direct, valuable asset for our project, as it can be adapted to become the **objective scoring mechanism** for the quality assurance phase of our generated LGS questions. We should leverage the LLM's reasoning by providing it with the **learning objective** first, before asking it to generate the question.
