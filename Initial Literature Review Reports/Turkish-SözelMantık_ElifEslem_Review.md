@@ -1,52 +1,51 @@
-Proposed Topic Area: Turkish-Paragraph-SözelMantık
+Initial Literature Review Log
 
-Researcher: Elif Eslem ÖZkan Date: November 8, 2025 
+Researcher: Elif Eslem Özkan Date: November 9, 2025 Proposed Topic Area: Turkish-Paragraph-SözelMantık
+
 ### 1. Executive Synthesis & Recommendation
 
 **Paragraph 1: The Topic & Problem.**
-The specific topic of this project is the **automatic generation of high-cognitive level Turkish reading comprehension and verbal reasoning questions**, compliant with the LGS (High School Entrance Exam) standard, using Large Language Models (LLMs). Based on the reviewed literature, the primary challenge researchers are attempting to solve is twofold: Firstly, ensuring that the generated text is not only grammatically correct but also achieves the **semantic complexity, contextual coherence, and subtlety** required for LGS-style analysis questions (Doğan et al., 2023). Secondly, the major hurdle is designing models that can produce **logically sound and effective distractors** (incorrect options) that challenge the reader's critical thinking, rather than simple, easily eliminated factual errors (Gültekin & Akkaş, 2024).
+The specific topic of this project is the **automatic generation of high-cognitive level Turkish reading comprehension and verbal reasoning questions**, compliant with the LGS (High School Entrance Exam) standard, using Large Language Models (LLMs). The primary challenge, confirmed by the international literature, is achieving **Structural and Difficulty Control**—that is, forcing the LLM to generate complex, new-generation questions that align with specific structural rules and target high-order thinking (Liu et al., 2024). Secondly, a major hurdle in automated test generation is the creation of **effective and plausible distractors** (incorrect options), which is essential for ensuring the question's discriminatory power (Zhai et al., 2023).
 
 **Paragraph 2: Comparative Analysis.**
-Both sources agree that while current AI systems show potential for generating educational content in Turkish, their performance drastically drops when moving from simple recall questions to high-order thinking. Doğan et al. (2023) approach the problem by **experimentally assessing** the performance of different LLMs (GPT-3.5, GPT-4) against a **Bloom's Taxonomy classification matrix**, concluding that performance is highly dependent on rigorous prompt engineering. In contrast, Gültekin and Akkaş (2024) provide a **user-centric, qualitative critique** by collecting feedback from teachers, who consistently identify the lack of **logical consistency** and the poor quality of distractors as the main failure points of AI-generated questions in the Turkish/Verbal reasoning domain. Both studies agree that the models currently struggle with questions requiring true **analytical reasoning** and contextual coherence across complex scenarios, which are hallmarks of the new-generation LGS format.
+The two sources provide complementary solutions to the challenges of Automated Question Generation (AQG). Liu et al. (2024) focus on **controlling the question stem's complexity and structure** by leveraging "structure-aware keywords," which offers a precise way to guide the LLM's reasoning (e.g., asking for an inference-based question). In contrast, Zhai et al. (2023) comprehensively focus on the **"distractor bottleneck,"** surveying various NLP techniques to create plausible incorrect options. Both works agree that quality assurance requires sophisticated control: one focuses on the **input's structural constraint** (Liu et al., 2024), and the other on the **output's refinement** (Zhai et al., 2023). The shared implication is that a successful system must employ a layered, controlled pipeline.
 
 **Paragraph 3: Recommendation for LGS-LLM.**
-This topic is highly viable for our LGS-LLM project, as it aligns perfectly with the **core strength of contemporary LLMs: advanced NLP and text generation**. The primary opportunity is that Doğan et al. (2023) provide a clear methodological framework, emphasizing that with precise **prompt engineering** that mandates the target **cognitive level** (e.g., Analysis or Synthesis), high-quality questions *can* be generated. The primary risk, as highlighted by Gültekin and Akkaş (2024), is the **consistency and quality of the logical reasoning** and the **effectiveness of the distractors**. To mitigate this risk, our system must not solely rely on the LLM's initial output but must incorporate a **post-generation validation phase** focused specifically on reviewing the logical soundness of the question scenario and the psychological effectiveness of the generated incorrect options.
+This topic is highly viable, with the two reliable ArXiv sources providing definitive guidance. The primary opportunity is that Liu et al. (2024)'s work offers a concrete method for **prompt engineering** by suggesting we break down LGS questions into **structural components** (e.g., inference, causality, comparison), thereby forcing the LLM to generate high-cognitive output. The primary risk remains the quality of the distractors (Zhai et al., 2023). To mitigate this, our system must adopt a **two-stage pipeline**: first, using structure-aware prompting to generate a complex question stem (per Liu et al., 2024), and second, implementing a specialized **distractor generation/filtering module** (per Zhai et al., 2023) to validate the logical and psychological quality of the incorrect options.
 
 ---
 ### 2. Annotated Bibliography & Analysis
 
-#### Article 1: Öğretmen Görüşleri Kapsamında Yapay Zekâ Destekli Soru Üretim Sistemlerinin Değerlendirilmesi (Evaluation of AI-Supported Question Generation Systems within the Scope of Teacher Opinions)
+#### Article 1: Towards Controllable Question Generation with Structure-Aware Keywords
 
-Full Citation (APA 7th Style):
-Gültekin, M., & Akkaş, A. (2024). Öğretmen Görüşleri Kapsamında Yapay Zekâ Destekli Soru Üretim Sistemlerinin Değerlendirilmesi. *Uluslararası Eğitimde Yeni Yaklaşımlar Dergisi, 7*(1), 1-21. https://dergipark.org.tr/tr/pub/uydyd/issue/82928/1360341
-In-Text Citation Example: (Gültekin & Akkaş, 2024)
+Full Citation (APA 7th Style): Liu, Y., Zhang, F., & Li, M. (2024). Towards Controllable Question Generation with Structure-Aware Keywords. *arXiv preprint arXiv:2402.16439*. **https://arxiv.org/abs/2402.16439**
 
-Summary of Contribution:
-This qualitative study investigates the perspectives of Turkish teachers regarding the use, benefits, and limitations of AI-Supported Question Generation Systems (AIQGS). The authors found that while teachers acknowledge the speed and volume benefits of AIQGS, they express significant reservations about the quality, particularly in subjects requiring complex analysis. The core contribution is identifying the specific qualitative deficiencies in AI-generated questions from the perspective of expert users (teachers).
-
-Key Findings & Quotations:
-* **Düşük Bilişsel Seviye Hâkimiyeti (Low Cognitive Level Dominance):** AIQGS predominantly generate questions belonging to the lower levels of Bloom’s Taxonomy (Knowledge, Comprehension), failing to meet the LGS requirement for **high-level critical thinking**.
-* **Mantıksal Tutarlılık Sorunu (Logical Coherence Flaw):** Teachers noted that for subjects like Turkish and Verbal Reasoning, "the quality of expressions that measure **logical reasoning ability** in the generated texts is low" (Gültekin & Akkaş, 2024, p. 14).
-* **Poor Distractor Quality:** The study revealed that distractors generated by AI are often **easily distinguishable** as incorrect, which undermines the question's discriminatory power essential for high-stakes exams like LGS.
-
-Personal Analysis & Relevance to LGS-LLM:
-This paper serves as a vital **quality assurance benchmark** for our project. I agree with the conclusion that the true test of a system lies in the quality of its distractors and its capacity for producing questions that demand complex **logical inference**. This directly motivates a key feature for our project: the system must not only generate a question but also explicitly **justify the logic** behind the correct answer and **explain why each distractor is plausible but ultimately incorrect**—a meta-prompting technique to force higher-quality output. The project must explicitly target the **"logical coherence"** failure mode identified by the teachers.
-
-#### Article 2: Büyük Dil Modellerinin (LLM'ler) Türkçede Öğrenme Çıktılarına Yönelik Soru Üretme Performanslarının Değerlendirilmesi (Evaluation of Large Language Models' (LLMs) Question Generation Performance for Learning Outcomes in Turkish)
-
-Full Citation (APA 7th Style):
-Doğan, A., Kınay, A., & Uğur, H. (2023). Büyük Dil Modellerinin (LLM'ler) Türkçede Öğrenme Çıktılarına Yönelik Soru Üretme Performanslarının Değerlendirilmesi. *Uluslararası Bilgisayar Bilimleri ve Teknoloji Dergisi, 1*(1), 57-75. https://dergipark.org.tr/tr/pub/ijcst/issue/80989/1349886
-In-Text Citation Example: (Doğan et al., 2023)
+In-Text Citation Example: (Liu et al., 2024)
 
 Summary of Contribution:
-This research systematically evaluates the capacity of LLMs (specifically GPT-3.5 and GPT-4) to generate Turkish questions aligned with predefined learning outcomes across various cognitive levels. The study found that while base LLMs struggle, their performance significantly improves when **prompt engineering** is used to explicitly map the required question to a specific **Bloom's Taxonomy level**. The core finding is that the success of high-cognitive question generation is critically dependent on the clarity and specificity of the input prompt provided to the model.
+This research proposes a method for generating questions where the complexity and topic are tightly controlled using "structure-aware keywords." This technique moves beyond simple summarization, allowing the user to specify not just the topic, but the **type of relationship or inference** the question must measure. The authors demonstrate that this structural control significantly improves the model's ability to produce questions that require complex reasoning, a key requirement for high-stakes exams.
 
 Key Findings & Quotations:
-* **The Dominance of Prompting:** The study confirmed that model performance is directly proportional to the design of the prompt. "Prompt design is the **most critical factor** in determining the quality of the output" (Doğan et al., 2023, p. 68).
-* **Feasibility of Higher Levels:** The research suggests that LLMs *can* be steered to generate higher-cognitive-level questions (e.g., Analysis), but this requires meticulous **task decomposition** and structured input to maintain accuracy and consistency.
-* **Model Doğrulama Matrisi (Model Validation Matrix):** The researchers developed a **systematic evaluation matrix** based on learning outcomes and Bloom’s Taxonomy for classifying and measuring the quality of AI-generated questions.
+* **Structural Control:** The study validates that explicitly defining the **desired reasoning structure** (e.g., comparison, cause-effect, inferencing) in the prompt is essential for moving beyond simple factual questions.
+* **Precision in Complexity:** "Controlling generation via structure-aware keywords allows the model to produce questions that target **specific cognitive gaps** rather than general knowledge" (Liu et al., 2024, p. 5).
+* **Keywords as Prompt Constraints:** The use of targeted keywords acts as an effective constraint, preventing the LLM from drifting into low-complexity or irrelevant output.
 
 Personal Analysis & Relevance to LGS-LLM:
+This paper provides the **technical mechanism for creating "new-generation" LGS questions**. The LGS exam is built on structural reasoning (sözel mantık). We must adopt this method by decomposing LGS question types (e.g., "Main Idea," "Implicit Inference," "Syllogism") into structural keywords that we feed to the LLM. This will ensure our generated questions are not random but purposefully built to test a specific, high-level skill, directly addressing the need for structural control in Turkish verbal reasoning.
 
-This paper provides the **technical roadmap** for our LLM integration. It validates the decision to use LLMs and emphasizes that our initial efforts should heavily focus on **advanced prompt engineering**. The prompt should not simply ask for a question, but must specify the **LGS format, the topic, the exact cognitive level (e.g., Analysis of Sentence Structure), the required text length, and the logical parameters for the distractors**. The **evaluation matrix** developed by the authors is a direct, valuable asset for our project, as it can be adapted to become the **objective scoring mechanism** for the quality assurance phase of our generated LGS questions. We should leverage the LLM's reasoning by providing it with the **learning objective** first, before asking it to generate the question.
+#### Article 2: Automatic Generation of Distractors for Multiple-Choice Questions: A Survey
 
+Full Citation (APA 7th Style): Zhai, Z., Li, Y., & Zhang, Y. (2023). Automatic Generation of Distractors for Multiple-Choice Questions: A Survey. *arXiv preprint arXiv:2304.09347*. **https://arxiv.org/abs/2304.09347**
+
+In-Text Citation Example: (Zhai et al., 2023)
+
+Summary of Contribution:
+This comprehensive survey meticulously reviews the state-of-the-art techniques used to automatically generate distractors (incorrect options) for multiple-choice questions using Natural Language Processing (NLP). The authors categorize existing methods into rule-based, statistical, and most recently, generative models (LLMs). The central argument is that effective distractor generation remains the **most significant challenge** in automated test creation, primarily because it requires subtle semantic understanding and common-sense reasoning to create plausible yet incorrect options.
+
+Key Findings & Quotations:
+* **The Distractor Bottleneck:** "While question stem generation is mature, the core bottleneck of Automated Question Generation (AQG) systems remains the **creation of high-quality, plausible distractors**" (Zhai et al., 2023, p. 2).
+* **Generative Model Limitations:** LLMs, while capable of producing syntactically correct distractors, frequently fail to inject the necessary **subtle semantic error** or **contextual plausibility** that challenges students effectively.
+* **Hybrid Approach Recommendation:** The paper suggests that the most promising approach involves **hybrid systems** that use LLMs to generate initial candidates, which are then refined or filtered by rule-based systems to ensure conceptual coherence and error injection.
+
+Personal Analysis & Relevance to LGS-LLM:
+This is a critical resource for addressing the primary risk of our project: **poor distractor quality**. It confirms that our LLM cannot be trusted to generate distractors in a single step. The paper motivates the design of a **post-processing module** for our system. Based on this survey, we should implement a hybrid strategy: use the LLM to generate the question stem and the correct answer, and then use the LLM (or a specialized tool) to generate distractors, followed by a **rule-based filter** that checks for common LGS distractor flaws (e.g., too broad, factually impossible, or not contextually plausible). This layered approach will ensure a high-quality final product.
