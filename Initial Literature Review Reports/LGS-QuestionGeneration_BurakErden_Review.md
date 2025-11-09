@@ -26,7 +26,8 @@ LGS-LLM projesi için en uygun çözüm, bu iki yaklaşımın birleşiminden do�
 ## 2. Açıklamalı Kaynakça ve Analiz (Annotated Bibliography & Analysis)
 
 ### 2.1 Makale 1: Automating Question Generation From Educational Text  
-**Bhowmick et al. (2023)**  
+**Bhowmick et al. (2023) Full Citation (APA 7):**
+Bhowmick, A. K., Jagmohan, A., Vempaty, A., Dey, P., Hall, L., Hartman, J., Kokku, R., & Maheshwari, H. (2023). Automating question generation from educational text. In M. Bramer & F. Stahl (Eds.), SGAI 2023: Research and Development in Intelligent Systems (Lecture Notes in Artificial Intelligence, Vol. 14381, pp. 437–450). Springer. https://doi.org/10.1007/978-3-031-47994-6_38
 
 Bu çalışma, eğitim metinlerinden otomatik olarak çoktan seçmeli sorular üreten **QGen** adlı modüler bir sistem sunmaktadır. Sistem, soru üretimi (T5 / InstructGPT), cevap çıkarımı (RoBERTa / InstructGPT) ve distractor üretimi için hibrit yöntemler kullanır.
 
@@ -88,7 +89,9 @@ QGen, bir çoktan seçmeli soruyu, içerik anlama, doğru cevabı çıkarma ve i
 
 
 ### 2.2 Makale 2: Few-shot is enough: exploring ChatGPT prompt engineering method for automatic question generation in English education  
-**Lee et al. (2024)**
+**Lee et al. (2024) Full Citation (APA 7):**
+
+Lee, U., Jung, H., Jeon, Y., Sohn, Y., Hwang, W., Moon, J., & Kim, H. (2024). Few-shot is enough: Exploring ChatGPT prompt engineering method for automatic question generation in English education. Education and Information Technologies, 29, 11483–11515. https://doi.org/10.1007/s10639-023-12249-8
 
 Bu çalışma, ChatGPT gibi büyük dil modellerinin doğrudan kullanılmasından ziyade, dikkatle tasarlanmış **prompt şablonları** ve **öğretmen-in-the-loop doğrulama** süreçlerinin, soru üretim kalitesini artırdığını göstermektedir. Çalışma, soru türlerini sınıflandırmak için **2D Matris Yaklaşımı** sunar.
 
