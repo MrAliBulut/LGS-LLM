@@ -87,3 +87,4 @@ However:
 > 🔮 *Future work envisions intelligent, deep learning–powered systems capable of providing fully automated and accurate educational assessments.*
 
 ---
+🔗 [View the full article here](https://telrp.springeropen.com/articles/10.1186/s41039-021-00151-1)
