@@ -1,6 +1,6 @@
 Initial Literature Review Log
 
-Researcher: Elif Eslem Özkan Date: November 9, 2025 Proposed Topic Area: Turkish-Paragraph-SözelMantık
+Researcher: Elif Eslem Özkan Date: November 11, 2025 Proposed Topic Area: Turkish-Paragraph-SözelMantık
 
 ### 1. Executive Synthesis & Recommendation
 
@@ -18,7 +18,7 @@ This topic is highly viable, with the two reliable ArXiv sources providing defin
 
 #### Article 1: Towards Controllable Question Generation with Structure-Aware Keywords
 
-Full Citation (APA 7th Style): Liu, Y., Zhang, F., & Li, M. (2024). Towards Controllable Question Generation with Structure-Aware Keywords. *arXiv preprint arXiv:2402.16439*. **https://arxiv.org/abs/2402.16439**
+**Full Citation (APA 7th Style): Liu, Y., Zhang, F., & Li, M. (2024).** *Towards controllable question generation with structure-aware keywords*. **arXiv preprint arXiv:2402.16439. https://arxiv.org/abs/2402.16439**
 
 In-Text Citation Example: (Liu et al., 2024)
 
@@ -35,7 +35,7 @@ This paper provides the **technical mechanism for creating "new-generation" LGS 
 
 #### Article 2: Automatic Generation of Distractors for Multiple-Choice Questions: A Survey
 
-Full Citation (APA 7th Style): Zhai, Z., Li, Y., & Zhang, Y. (2023). Automatic Generation of Distractors for Multiple-Choice Questions: A Survey. *arXiv preprint arXiv:2304.09347*. **https://arxiv.org/abs/2304.09347**
+**Full Citation (APA 7th Style): Zhai, Z., Li, Y., & Zhang, Y. (2023).** *Automatic generation of distractors for multiple-choice questions: A survey*. **arXiv preprint arXiv:2304.09347. https://arxiv.org/abs/2304.09347**
 
 In-Text Citation Example: (Zhai et al., 2023)
 
