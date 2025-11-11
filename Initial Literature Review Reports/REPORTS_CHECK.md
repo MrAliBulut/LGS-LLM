@@ -30,6 +30,8 @@ These members successfully completed the task, adhered to academic standards, an
 - `Burak Can Kahraman` (OK)
 - `Burak Erden` (OK)
 - `Ömer Efe Gürbüz` (OK)
+- `Gökhan Çağaptay` (OK)
+- `Mehmet Fatih Şık` (OK)
 
 #### Category 2: Invalid Submissions (Requires Correction)
 
@@ -42,8 +44,7 @@ These members submitted work, but it failed a critical academic integrity check.
 
 These members failed to produce a usable report for Phase 1.
 
-- `Gökhan Çağaptay` (Submitted "Empty file")
-- `Mehmet Fatih Şık` (Submission: NO)
+
 - `Metin Cansız` (Submission: NO)
 - `Ramazan Tunç` (Submission: NO)
 - `Doğukan Enes` (Submission: NO)
