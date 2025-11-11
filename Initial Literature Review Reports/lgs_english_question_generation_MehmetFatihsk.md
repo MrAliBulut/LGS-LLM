@@ -4,7 +4,7 @@
 **Date:** November 11, 2025  
 **Proposed Topic Area:** English Language Education – Automatic Question Generation  
 
-> *Note: This review and document utilized NotebookLM and GPT-5 Mini for summarization and structuring assistance.*
+
 
 ---
 
