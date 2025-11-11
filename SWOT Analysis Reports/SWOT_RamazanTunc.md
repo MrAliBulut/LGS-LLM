@@ -29,9 +29,4 @@
 - LLM çıktılarında hatalı veya yanıltıcı sorular üretme riski, projenin güvenilirliğini zedeleyebilir.  
 - Eğitim politikalarındaki değişiklikler veya sınav formatının revizyonu, projeyi güncelliğini kaybettirebilir.  
 
----
-
-### 5. Personal Strategic Recommendation
-Analizime göre projemizin en güçlü yönü, RAG tabanlı bilgi entegrasyonu sayesinde yüksek doğruluk potansiyeline sahip olması. Ancak bu avantaj, prompt mühendisliğinde deneyim eksikliğiyle zayıflayabilir. Bu nedenle ekip içi “prompt review” oturumları yapılmalı ve en etkili promptlar ortak havuzda toplanmalıdır.  
-Görsel üretim kısmı yüksek risk taşıyor; bu modül “ikincil hedef” olarak tutulmalı ve yalnızca metin üretimi kararlı hale geldikten sonra ilerletilmelidir.
 
