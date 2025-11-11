@@ -32,13 +32,13 @@ These members successfully completed the task, adhered to academic standards, an
 - `Ömer Efe Gürbüz` (OK)
 - `Gökhan Çağaptay` (OK)
 - `Mehmet Fatih Şık` (OK)
+- `Elif Eslem Özkan` (OK)
 
 #### Category 2: Invalid Submissions (Requires Correction)
 
 These members submitted work, but it failed a critical academic integrity check. The citations provided were not findable (`Citation Check: NO`). As such, their research is currently unusable and requires immediate correction and resubmission.
 
 - `Serhat Çelik` (Invalid Citations)
-- `Elif Eslem Özkan` (Invalid Citations)
 
 #### Category 3: Non-Submissions / Critical Failure
 
