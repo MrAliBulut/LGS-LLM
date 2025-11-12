@@ -29,7 +29,7 @@
   Model, geçmiş sorulara aşırı odaklanırsa (**overfitting**), MEB'in o sene deneyeceği yeni bir soru tarzını öngöremez ve sürekli eski tarzı taklit eder.
 
 - **Yüksek Başlangıç Maliyeti:**  
-  Kaliteli bir model (GPT-4o, Gemini 1.5 Pro vb.) API kullanımı, potansiyel ince ayar (**fine-tuning**) ve en önemlisi uzman öğretmen ekibinin maliyeti yüksek olacaktır.
+  Kaliteli bir model (GPT-4o, Gemini 1.5 Pro vb.) API kullanımı, potansiyel ince ayar (**fine-tuning**) maliyeti yüksek olacaktır.
 
 
 ##  Fırsatlar (Opportunities)
@@ -61,3 +61,4 @@
 
 - **Müfredat Değişiklikleri:**  
   MEB’in sık yaptığı köklü müfredat değişiklikleri, modelin eğitildiği geçmiş verileri (eski soruları) geçersiz kılabilir.
+
