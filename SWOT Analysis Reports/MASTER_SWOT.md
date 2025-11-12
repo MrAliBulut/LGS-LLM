@@ -243,12 +243,10 @@ Here is the final, clean, non-redundant Master SWOT list, using only the "Best P
 
 - **S1:** **(RAG)** High-Quality RAG Corpus: Utilizing official LGS lecture books and previous exam questions provides a clean, pedagogically validated, and highly relevant knowledge base for RAG.
 - **S2:** **(Methodology)** Speed and Flexibility (No Finetuning): Our 'No-Finetuning' strategy provides immense development speed and flexibility. It allows us to instantly integrate the newest SOTA models (e.g., GPT-4o, Llama 3) to test which yields the best results.
-- **S3:** **(Team)** The team includes both software and language experts, improving the technical and linguistic accuracy of the project.
-- **S4:** **(Scope)** Structured Domain: LGS English has more clearly defined vocabulary lists, clear grammar structures, and recurring question patterns. This structured nature makes it easier for the AI to learn patterns.
-- **S5:** **(Scope)** Optimal Language Alignment: LLMs perform best in English, the target language. This inherently minimizes the risk of grammatical errors.
-- **S6:** **(Scope)** Clear project scope and strategic direction provides unity of purpose for the team.
-- **S7:** **(Scope)** Curriculum stability (LGS English) ensures the knowledge base remains valid for a long time.
-- **S8:** **(Feature)** Image generation makes the project more innovative than standard text-only systems.
+- **S3:** **(Scope)** Structured Domain: LGS English has more clearly defined vocabulary lists, clear grammar structures, and recurring question patterns. This structured nature makes it easier for the AI to learn patterns.
+- **S4:** **(Scope)** Optimal Language Alignment: LLMs perform best in English, the target language. This inherently minimizes the risk of grammatical errors.
+- **S5:** **(Scope)** Clear project scope and strategic direction provides unity of purpose for the team.
+- **S6:** **(Scope)** Curriculum stability (LGS English) ensures the knowledge base remains valid for a long time.
 
 #### **WEAKNESSES (Internal)**
 
