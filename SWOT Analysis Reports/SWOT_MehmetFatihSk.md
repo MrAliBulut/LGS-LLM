@@ -7,8 +7,8 @@
 
 ### 1. Güçlü Yönler (İç, Pozitif)
 
-- **Yapay Zeka ve NLP Kullanımı**  
-  Model, dilbilgisel yapı ve soru türlerini anlamlandırarak özgün soru üretimi yapabilir.
+- **Tek Branş Odaklı Tasarım**  
+  Sadece İngilizceye odaklanmak, tüm ekibin aynı hedefte yoğunlaşmasını sağlar ve karmaşıklaştırıcı unsurları ortadan kaldırır.
 
 - **Veri Odaklı Tahmin**  
   Önceki sınavlardaki soru kalıplarını analiz ederek olası yeni tarzları öngörebilir.
@@ -29,24 +29,21 @@
 - **Veri Sınırlılığı**  
   LGS İngilizce soru arşivi sınırlı olduğundan modelin öğrenme kapasitesi kısıtlanabilir.
 
-- **Model Eğitimi Maliyeti**  
-  Gelişmiş dil modellerinin eğitimi yüksek GPU gücü ve bulut maliyeti gerektirir.
-
 - **Tarz Uyumu Sorunu**  
   Üretilen soruların MEB sınav diline tam uyum sağlaması güç olabilir.
 
 - **Etik Risk**  
   Telifli soruların doğrudan kullanımı yasal veya etik sorun doğurabilir.
 
-- **Modelin Aşırı Öğrenmesi**  
-  Belirli yıllara veya konulara fazla odaklanırsa genelleme yeteneğini kaybedebilir.
+- **Prompt Engineering’e Aşırı Bağımlılık**  
+  Fine-tuning yapılmadığı için tüm kalite prompt tasarımına bağlanır. Hatalı, tutarsız veya eksik promptlar doğrudan soru kalitesinin düşmesine yol açabilir.
 
 ---
 
 ### 3. Fırsatlar (Dış, Pozitif)
 
 - **Eğitimde Yapay Zeka Trendleri**  
-  Türkiye’de LGS odaklı AI tabanlı sistemler henüz yeni gelişmektedir, öncü olma potansiyeli vardır.
+  Türkiye’de LLM tabanlı test üretimi çok yeni; ilklerden biri olma avantajı var.
 
 - **Kurumsal İş Birlikleri**  
   Özel okullar veya yayınevleriyle ortaklık kurularak model test edilebilir.
@@ -55,7 +52,7 @@
   Aynı sistem ortaokul, lise veya TOEFL, YDS gibi sınavlar için uyarlanabilir.
 
 - **Akademik Araştırma Desteği**  
-  Üniversitelerde yapay zekâ tabanlı eğitim teknolojileri üzerine yapılan çalışmalara örnek teşkil eder.
+  LLM tabanlı soru üretimi üzerine akademik çalışma ve konferans bildirisi üretme imkânı vardır.
 
 - **Yapay Zeka Destekli Ölçme-Değerlendirme**  
   Sadece soru üretimi değil, doğru/yanlış açıklama önerileri de eklenebilir.
@@ -68,7 +65,7 @@
   Sınav sistemi veya müfredat değişiklikleri modelin doğruluğunu azaltabilir.
 
 - **Artan Rekabet**  
-  Benzer yapay zekâ tabanlı eğitim girişimleri artmaktadır.
+  LLM tabanlı eğitim startupları hızla çoğalıyor; pazarda güçlü rakipler oluşabilir.
 
 - **Güven Sorunları**  
   Kullanıcıların AI tarafından üretilen sorulara güven duyması zaman alabilir.
@@ -76,11 +73,14 @@
 - **Veri Güvenliği**  
   Öğrenci verilerinin korunması ve anonimleştirilmesi kritik öneme sahiptir.
 
-- **Yanlış Tahmin Riski**  
-  Model hatalı öngörülerle öğrencinin motivasyonunu olumsuz etkileyebilir.
-
 ---
 
 ### 5. Kişisel Stratejik Öneri
 
-SWOT analizine göre, projenin ilk aşamasında geçmiş LGS sorularının yapısal analiziyle başlayan, daha sonra GPT veya benzeri dil modelleriyle desteklenen bir 'soru tahmin ve üretim motoru' geliştirilebilir. Uzun vadede sistem, öğrencinin eksik olduğu konuları tespit ederek kişisel öğretim planları önerebilir.
+Bu SWOT analizine göre projede en güçlü yanımız, tek bir ders alanına odaklanmamız ve LLM ile hızlı soru üretebilmemiz. En büyük riskimiz ise veri azlığı ve tüm kaliteyi promptlara bağlamamız.
+
+Bu yüzden önceliğim, önce sağlam bir veri tabanı ve standart bir prompt şablonu oluşturmak olur. Bu iki nokta sağlam olursa hem soru kalitesi artar hem de sistem daha stabil çalışır.
+
+Tehditlere karşı da sistemin müfredat değişikliklerine hızlı uyum sağlayacak esneklikte olması ve öğrenci verilerinin kesinlikle gizli tutulması gerekmektedir.
+
+Ayrıca metin sorularını mükemmelleştirmek, sonra istersek görsel sorulara genişlemek en doğru strateji olacaktır.
