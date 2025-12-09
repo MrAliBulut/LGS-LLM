@@ -7,8 +7,9 @@ This document is the official control log and synthesis report for Phase 1: Init
 - **Objective:** To have all 15 team members research 2 sources to help define the project's scope and technical direction.
 - **Methodology:** A `REPORTS_CHECK.md` log (this file) was used to track individual submissions, adherence to project protocols (coordination, naming), and academic integrity (citation validity).
 - **Performance:**
-  - **Submissions:** 10 out of 15 members (67%) submitted a report. 5 members (33%) failed to submit.
-  - **Validity:** Of the 10 submissions, 1 was an "Empty File" and 2 contained "Citation Check: NO" (unverifiable sources). This leaves **7 fully valid and usable reports**.
+  - **Submissions:** 12 out of 15 members (80%) submitted a report. 3 members (25%) failed to correctly submit.
+  - **Validity:** Of the 12 submissions, 2 contained "Citation Check: NO" (unverifiable sources). This leaves **10 valid and usable reports**.
+  - 
 - **Key Research Findings (From Valid Reports):**
   1.  **Strategic Validation (RAG):** The research (e.g., Soner Eski, Art 2) provides strong evidence that our RAG-based approach (using lecture books) is superior to prompt-only methods.
   2.  **Strategic Validation (QA):** The research (e.g., Muhammed Göymen, Art 1; Burak Erden, Art 2) confirms that automatic evaluation is unreliable. Our plan to use a "Human-in-the-Loop" (teacher-in-the-loop) QA team is the correct methodology.
