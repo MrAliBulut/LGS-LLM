@@ -1,0 +1,17 @@
+{
+  "year": 2017,
+  "question_number": 3,
+  "question_text": "Mark : I am going to see my sister in the afternoon. Would you like to come with me?  Sarah : Why not? - - - -? Mark : In front of the cinema. We want to watch a movie together.",
+  "options": {
+    "a": "Who will you go out with",
+    "b": "What are you going to buy",
+    "c": "What time will you go there",
+    "d": "Where are you going to meet"
+  },
+  "correct_option": "D",
+  "topic": "Friendship",
+  "created_at": {
+    "$date": "2025-11-11T12:02:21.784Z"
+  },
+  "source": "LGS İngilizce Soruları 2017-2023"
+}

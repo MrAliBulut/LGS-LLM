@@ -1,0 +1,17 @@
+account
+attachment
+browse
+browser
+comment
+confirm
+connection
+delete
+download
+log on / in / off
+register
+reply
+screen
+search engine
+sign in / up
+social networking site
+upload

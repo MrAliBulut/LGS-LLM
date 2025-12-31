@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LGS-LLM Project Comprehensive Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .metadata {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 1px solid #dee2e6;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .metadata-item {
+            padding: 10px;
+        }
+        
+        .metadata-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .highlight {
+            background: #f0f4ff;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .tech-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .tech-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .flow-diagram {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: monospace;
+            border: 1px solid #dee2e6;
+            overflow-x: auto;
+        }
+        
+        .endpoint {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+        
+        .endpoint strong {
+            color: #856404;
+        }
+        
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .info {
+            color: #0c5460;
+            background: #d1ecf1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #0c5460;
+        }
+        
+        .warning {
+            color: #856404;
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .architecture-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border: 1px solid #667eea;
+        }
+        
+        .step-by-step {
+            counter-reset: steps;
+            list-style: none;
+        }
+        
+        .step-by-step li {
+            counter-increment: steps;
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+        }
+        
+        .step-by-step li:before {
+            content: counter(steps);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            text-align: center;
+            border-top: 1px solid #dee2e6;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 LGS-LLM Project</h1>
+            <p>AI-Powered Exam Question Generation System for Turkish LGS English Tests</p>
+        </header>
+        
+        <div class="metadata">
+            <div class="metadata-item">
+                <strong>Project Type:</strong> Exam Question Generator
+            </div>
+            <div class="metadata-item">
+                <strong>Target Users:</strong> Students preparing for LGS English exam
+            </div>
+            <div class="metadata-item">
+                <strong>Date Created:</strong> December 31, 2025
+            </div>
+            <div class="metadata-item">
+                <strong>Status:</strong> <span class="success">In Development</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- PROJECT OVERVIEW -->
+            <section>
+                <h2>1. Project Overview</h2>
+                
+                <p>LGS-LLM is an intelligent exam generation system designed to create custom English language questions for the Turkish national high school entrance exam (LGS). The system leverages Large Language Models (LLM) to generate high-quality, pedagogically sound questions that match the difficulty and style of actual LGS exams.</p>
+                
+                <div class="highlight">
+                    <strong>Key Features:</strong>
+                    <ul>
+                        <li>AI-powered question generation using Groq's llama-3.3-70b-versatile model</li>
+                        <li>Real-time streaming of generated questions to frontend</li>
+                        <li>Support for text and visual (image-based) questions</li>
+                        <li>Random distribution of visual questions across topics</li>
+                        <li>MongoDB integration for storing reference questions and metadata</li>
+                        <li>CEFR A1-A2 English level questions (8th grade standard)</li>
+                        <li>10 distinct English learning units with specialized vocabulary</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- TECHNOLOGY STACK -->
+            <section>
+                <h2>2. Technology Stack</h2>
+                
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <strong>Backend Framework</strong>
+                        FastAPI (Python 3.9)
+                    </div>
+                    <div class="tech-item">
+                        <strong>Frontend Framework</strong>
+                        Next.js 16 with React & TypeScript
+                    </div>
+                    <div class="tech-item">
+                        <strong>Database</strong>
+                        MongoDB Atlas (Cloud)
+                    </div>
+                    <div class="tech-item">
+                        <strong>LLM Provider</strong>
+                        Groq API (llama-3.3-70b-versatile)
+                    </div>
+                    <div class="tech-item">
+                        <strong>Async Driver</strong>
+                        Motor (Async MongoDB driver)
+                    </div>
+                    <div class="tech-item">
+                        <strong>Styling</strong>
+                        Tailwind CSS & Shadcn UI components
+                    </div>
+                    <div class="tech-item">
+                        <strong>Export Format</strong>
+                        PDF (jsPDF library)
+                    </div>
+                    <div class="tech-item">
+                        <strong>Communication</strong>
+                        NDJSON (Newline Delimited JSON) for streaming
+                    </div>
+                </div>
+            </section>
+            
+            <!-- SYSTEM ARCHITECTURE -->
+            <section>
+                <h2>3. System Architecture</h2>
+                
+                <h3>High-Level Overview</h3>
+                
+                <div class="architecture-box">
+                    <strong>Frontend (Next.js)</strong>
+                    <p>User interface for exam configuration and question display</p>
+                    <ul>
+                        <li>Exam Configurator: Select topics and question count</li>
+                        <li>Exam Workspace: Display streamed questions with real-time progress</li>
+                        <li>Question Card: Render individual questions with options</li>
+                    </ul>
+                </div>
+                
+                <div class="architecture-box">
+                    <strong>Backend (FastAPI)</strong>
+                    <p>Question generation and streaming logic</p>
+                    <ul>
+                        <li>HTTP endpoints for exam generation</li>
+                        <li>LLM integration for question creation</li>
+                        <li>Image generation pipeline (placeholder ready)</li>
+                        <li>Random distribution of visual questions</li>
+                    </ul>
+                </div>
+                
+                <div class="architecture-box">
+                    <strong>Database (MongoDB)</strong>
+                    <p>Reference questions and metadata storage</p>
+                    <ul>
+                        <li>70 existing English questions across 10 topics</li>
+                        <li>Questions serve as examples for LLM training</li>
+                        <li>Cached in memory for performance</li>
+                    </ul>
+                </div>
+                
+                <div class="architecture-box">
+                    <strong>LLM Service (Groq)</strong>
+                    <p>Question generation using AI</p>
+                    <ul>
+                        <li>llama-3.3-70b-versatile model</li>
+                        <li>System prompt with CEFR A1-A2 guidelines</li>
+                        <li>Custom prompt templates for text and visual questions</li>
+                        <li>JSON output format with structured question data</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- DATABASE SCHEMA -->
+            <section>
+                <h2>4. Database Structure</h2>
+                
+                <h3>MongoDB Collection: english_questions</h3>
+                
+                <p>The database stores 70 reference questions across 10 English units.</p>
+                
+                <h4>Documents Structure:</h4>
+                <div class="code-block">
+{
+  "_id": ObjectId,
+  "year": 2023,
+  "question_number": 15,
+  "topic": "Friendship",
+  "question_text": "...",
+  "options": ["Option A", "Option B", "Option C", "Option D"],
+  "correct_option": "A",
+  "source": "LGS 2023",
+  "created_at": ISODate
+}
+                </div>
+                
+                <h4>Topics (10 Units):</h4>
+                <table>
+                    <tr>
+                        <th>Unit Name</th>
+                        <th>Question Count</th>
+                        <th>Focus Area</th>
+                    </tr>
+                    <tr>
+                        <td>Friendship</td>
+                        <td>12</td>
+                        <td>Social relationships and communication</td>
+                    </tr>
+                    <tr>
+                        <td>Teen Life</td>
+                        <td>11</td>
+                        <td>Adolescent activities and interests</td>
+                    </tr>
+                    <tr>
+                        <td>In The Kitchen</td>
+                        <td>8</td>
+                        <td>Food, cooking, and dining</td>
+                    </tr>
+                    <tr>
+                        <td>On The Phone</td>
+                        <td>7</td>
+                        <td>Communication and phone etiquette</td>
+                    </tr>
+                    <tr>
+                        <td>The Internet</td>
+                        <td>9</td>
+                        <td>Technology and online communication</td>
+                    </tr>
+                    <tr>
+                        <td>Adventures</td>
+                        <td>6</td>
+                        <td>Travel and exploration</td>
+                    </tr>
+                    <tr>
+                        <td>Tourism</td>
+                        <td>6</td>
+                        <td>Travel destinations and attractions</td>
+                    </tr>
+                    <tr>
+                        <td>Chores</td>
+                        <td>6</td>
+                        <td>Household tasks and responsibilities</td>
+                    </tr>
+                    <tr>
+                        <td>Science</td>
+                        <td>5</td>
+                        <td>Scientific concepts and discovery</td>
+                    </tr>
+                    <tr>
+                        <td>Natural Forces</td>
+                        <td>5</td>
+                        <td>Natural phenomena and weather</td>
+                    </tr>
+                </table>
+            </section>
+            
+            <!-- FRONTEND COMPONENTS -->
+            <section>
+                <h2>5. Frontend Architecture</h2>
+                
+                <h3>Component Structure</h3>
+                
+                <h4>app/page.tsx (Main Page)</h4>
+                <p>Entry point with Quick Start and Custom Configuration options</p>
+                <ul>
+                    <li>Quick Start: 1 question per topic (10 total)</li>
+                    <li>Custom Configuration: User-defined distribution</li>
+                </ul>
+                
+                <h4>exam-configurator.tsx</h4>
+                <p>Interface for selecting topics and question counts</p>
+                <ul>
+                    <li>Topic selection with checkboxes</li>
+                    <li>Question count slider for each topic</li>
+                    <li>Visual question count selector</li>
+                    <li>Start exam button</li>
+                </ul>
+                
+                <h4>exam-workspace.tsx</h4>
+                <p>Main exam display and question streaming handler</p>
+                <ul>
+                    <li>Fetches from <code>/generate-exam</code> endpoint</li>
+                    <li>Handles NDJSON streaming with proper buffer management</li>
+                    <li>Real-time progress tracking with loadingCount</li>
+                    <li>Question sorting and display</li>
+                    <li>PDF export functionality</li>
+                </ul>
+                
+                <h4>question-card.tsx</h4>
+                <p>Individual question rendering component</p>
+                <ul>
+                    <li>Supports both text and image-based questions</li>
+                    <li>Handles LLM format (nested question.stem, question.options)</li>
+                    <li>Interactive answer selection</li>
+                    <li>Answer reveal with distractor logic explanation</li>
+                    <li>Displays passage and stem separately for readability</li>
+                </ul>
+                
+                <h3>Data Flow in Frontend</h3>
+                <div class="flow-diagram">
+User selects topics & counts
+         ↓
+Sends POST to /generate-exam
+         ↓
+Opens streaming connection (NDJSON)
+         ↓
+Receives questions line-by-line
+         ↓
+Increments loadingCount (for progress)
+         ↓
+Adds to questions array & sorts
+         ↓
+QuestionCard renders each question
+         ↓
+Displays progress bar (loadingCount/total)
+         ↓
+Shows "PDF İndir" when all loaded
+                </div>
+            </section>
+            
+            <!-- BACKEND COMPONENTS -->
+            <section>
+                <h2>6. Backend Architecture</h2>
+                
+                <h3>Question Generator Module (question_generator.py)</h3>
+                
+                <h4>Key Functions:</h4>
+                
+                <h4>fetch_all_questions_from_db()</h4>
+                <p>Fetches all 70 reference questions from MongoDB once and caches them in memory.</p>
+                
+                <h4>group_questions_by_topic(questions)</h4>
+                <p>Organizes questions into a dictionary by topic for fast lookup.</p>
+                <div class="code-block">
+{
+  "Friendship": [q1, q2, q3, ...],
+  "Teen Life": [q1, q2, ...],
+  ...
+}
+                </div>
+                
+                <h4>load_vocab(file_path)</h4>
+                <p>Loads unit-specific vocabulary from text files for LLM context.</p>
+                
+                <h4>generate_question_for_unit(unit, visual=False)</h4>
+                <p>Calls Groq API to generate a question for the specified unit.</p>
+                <ul>
+                    <li>If visual=False: Generates text-based question</li>
+                    <li>If visual=True: Generates visual question with image_prompt</li>
+                    <li>Returns parsed JSON from LLM</li>
+                </ul>
+                
+                <h3>Exam Generator Module (generate_exam.py)</h3>
+                
+                <h4>generate_image_from_prompt(image_prompt)</h4>
+                <p>Receives image prompt and returns image URL (currently placeholder).</p>
+                <div class="info">
+                    <strong>Future Implementation:</strong> This function will integrate with your image generation API. Currently returns "/placeholder.svg" for testing.
+                </div>
+                
+                <h4>POST /generate-exam Endpoint</h4>
+                <p>Main API endpoint for exam generation.</p>
+                
+                <strong>Request Body:</strong>
+                <div class="code-block">
+{
+  "distribution": {
+    "Friendship": 2,
+    "Teen Life": 1,
+    ...
+  },
+  "visualCount": 2
+}
+                </div>
+                
+                <strong>Response:</strong> NDJSON stream of questions
+                <div class="code-block">
+{"id": "q1", "topic": "Friendship", "question": {...}, ...}
+{"id": "q2", "topic": "Friendship", "question": {...}, ...}
+...
+                </div>
+            </section>
+            
+            <!-- QUESTION GENERATION FLOW -->
+            <section>
+                <h2>7. Question Generation Pipeline</h2>
+                
+                <h3>Complete Flow from Request to Display</h3>
+                
+                <ol class="step-by-step">
+                    <li>
+                        <strong>Frontend sends request:</strong>
+                        <p>User clicks "Quick Start" or "Start Exam" after selecting distribution.</p>
+                        <p>POST /generate-exam with distribution and visualCount</p>
+                    </li>
+                    <li>
+                        <strong>Backend receives request:</strong>
+                        <p>Backend calculates visual distribution (random allocation to topics)</p>
+                        <p>Creates visual_indices map: which questions in each topic should be visual</p>
+                    </li>
+                    <li>
+                        <strong>Question generation starts:</strong>
+                        <p>For each topic in distribution:</p>
+                        <ul>
+                            <li>For each question count for that topic:</li>
+                            <li>Check if this question should be visual</li>
+                            <li>Call <code>generate_question_for_unit(topic, visual=is_visual)</code></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>LLM generates question:</strong>
+                        <p>LLM receives:</p>
+                        <ul>
+                            <li>System prompt (MASTER_SCHEMA with CEFR A1-A2 guidelines)</li>
+                            <li>Unit name and vocabulary glossary</li>
+                            <li>Example questions from database</li>
+                            <li>Prompt template (TEXT_QUESTION_TEMPLATE or VISUAL_QUESTION_TEMPLATE)</li>
+                        </ul>
+                        <p>LLM outputs structured JSON with question data</p>
+                    </li>
+                    <li>
+                        <strong>Process visual questions:</strong>
+                        <p>If visual=True:</p>
+                        <ul>
+                            <li>Extract image_prompt from generated question</li>
+                            <li>Call <code>generate_image_from_prompt(image_prompt)</code></li>
+                            <li>Set imageUrl in question object</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Add metadata:</strong>
+                        <p>Add to each question:</p>
+                        <ul>
+                            <li>id (q1, q2, q3...)</li>
+                            <li>topic</li>
+                            <li>hasImage (boolean)</li>
+                            <li>imageUrl</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Stream to frontend:</strong>
+                        <p>Encode as JSON and yield with newline delimiter</p>
+                        <p>Small delay (0.5s) between questions</p>
+                    </li>
+                    <li>
+                        <strong>Frontend receives and displays:</strong>
+                        <p>Parse NDJSON line by line</p>
+                        <p>Increment loadingCount (updates progress bar)</p>
+                        <p>Add to questions array and sort by id</p>
+                        <p>Render in QuestionCard component</p>
+                    </li>
+                </ol>
+            </section>
+            
+            <!-- QUESTION FORMATS -->
+            <section>
+                <h2>8. Question Data Formats</h2>
+                
+                <h3>LLM Generated Question Format</h3>
+                
+                <p>Questions returned by the LLM follow this structure:</p>
+                
+                <div class="code-block">
+{
+  "unit": "Friendship",
+  "type": "text",
+  "question": {
+    "passage": "Sarah and Mike are best friends...",
+    "stem": "What does Emily suggest they do?",
+    "options": {
+      "A": "Go to the cinema",
+      "B": "Have a picnic",
+      "C": "Play video games",
+      "D": "Study together"
+    },
+    "answer": "B"
+  },
+  "distractor_logic": {
+    "Wrong_Letter_1": "Logic trap - 'but' changes meaning",
+    "Wrong_Letter_2": "Role reversal trap",
+    "Wrong_Letter_3": "Irrelevant vocabulary"
+  }
+}
+                </div>
+                
+                <h3>Visual Question Format</h3>
+                
+                <p>Visual questions include an image_prompt field:</p>
+                
+                <div class="code-block">
+{
+  "unit": "In The Kitchen",
+  "type": "visual",
+  "image_prompt": "A busy kitchen scene with...",
+  "question": {
+    "passage": "",
+    "stem": "What is being prepared in the kitchen?",
+    "options": {...},
+    "answer": "C"
+  },
+  "distractor_logic": {...}
+}
+                </div>
+                
+                <h3>Frontend Enhanced Format</h3>
+                
+                <p>Backend adds metadata before streaming:</p>
+                
+                <div class="code-block">
+{
+  ...(all LLM fields),
+  "id": "q1",
+  "topic": "Friendship",
+  "hasImage": false,
+  "imageUrl": null
+}
+                </div>
+            </section>
+            
+            <!-- API ENDPOINTS -->
+            <section>
+                <h2>9. API Endpoints</h2>
+                
+                <h3>Health Check</h3>
+                <div class="endpoint">
+                    <strong>GET /health</strong>
+                    <p>Check if the backend service is running.</p>
+                    <strong>Response:</strong>
+                    <div class="code-block">
+{"status": "ok", "service": "LGS Exam Generator"}
+                    </div>
+                </div>
+                
+                <h3>Generate Exam</h3>
+                <div class="endpoint">
+                    <strong>POST /generate-exam</strong>
+                    <p>Generate exam questions based on distribution and stream them as NDJSON.</p>
+                    
+                    <strong>Request Body:</strong>
+                    <div class="code-block">
+{
+  "distribution": {
+    "Friendship": 3,
+    "Teen Life": 2,
+    "In The Kitchen": 1,
+    ...
+  },
+  "visualCount": 2
+}
+                    </div>
+                    
+                    <strong>Response:</strong>
+                    <p>HTTP 200 with stream of NDJSON (newline-delimited JSON)</p>
+                    <p>Each line is a complete question object</p>
+                    <p>Stream ends when all questions are generated</p>
+                    
+                    <strong>Error Handling:</strong>
+                    <div class="code-block">
+{"error": "error message"}
+                    </div>
+                </div>
+            </section>
+            
+            <!-- VOCABULARY SYSTEM -->
+            <section>
+                <h2>10. Vocabulary Management</h2>
+                
+                <p>Each English unit has a specialized vocabulary file stored in <code>backend/vocab/</code></p>
+                
+                <h3>Vocabulary Files</h3>
+                <table>
+                    <tr>
+                        <th>Unit</th>
+                        <th>Filename</th>
+                        <th>Word Count</th>
+                    </tr>
+                    <tr>
+                        <td>Friendship</td>
+                        <td>Friendship_vocab.txt</td>
+                        <td>31 words</td>
+                    </tr>
+                    <tr>
+                        <td>Teen Life</td>
+                        <td>Teen Life_vocab.txt</td>
+                        <td>19 words</td>
+                    </tr>
+                    <tr>
+                        <td>In The Kitchen</td>
+                        <td>In The Kitchen_vocab.txt</td>
+                        <td>28 words</td>
+                    </tr>
+                    <tr>
+                        <td>On The Phone</td>
+                        <td>On The Phone_vocab.txt</td>
+                        <td>15 words</td>
+                    </tr>
+                    <tr>
+                        <td>The Internet</td>
+                        <td>The Internet_vocab.txt</td>
+                        <td>17 words</td>
+                    </tr>
+                    <tr>
+                        <td>Adventures</td>
+                        <td>Adventures_vocab.txt</td>
+                        <td>18 words</td>
+                    </tr>
+                    <tr>
+                        <td>Tourism</td>
+                        <td>Tourism_vocab.txt</td>
+                        <td>16 words</td>
+                    </tr>
+                    <tr>
+                        <td>Chores</td>
+                        <td>Chores_vocab.txt</td>
+                        <td>17 words</td>
+                    </tr>
+                    <tr>
+                        <td>Science</td>
+                        <td>Science_vocab.txt</td>
+                        <td>18 words</td>
+                    </tr>
+                    <tr>
+                        <td>Natural Forces</td>
+                        <td>Natural Forces_vocab.txt</td>
+                        <td>15 words</td>
+                    </tr>
+                </table>
+                
+                <h3>Usage</h3>
+                <p>When generating questions for a topic:</p>
+                <ol>
+                    <li>Load corresponding vocabulary file</li>
+                    <li>Include vocabulary list in LLM prompt</li>
+                    <li>LLM uses vocabulary to create contextually relevant questions</li>
+                    <li>Helps maintain unit-specific content focus</li>
+                </ol>
+            </section>
+            
+            <!-- LLM INTEGRATION -->
+            <section>
+                <h2>11. LLM Integration Details</h2>
+                
+                <h3>Groq API Setup</h3>
+                <ul>
+                    <li>Provider: Groq (groq.com)</li>
+                    <li>Model: llama-3.3-70b-versatile</li>
+                    <li>API Authentication: API key stored in environment</li>
+                </ul>
+                
+                <h3>Prompt Engineering</h3>
+                
+                <h4>MASTER_SCHEMA (System Prompt)</h4>
+                <p>Establishes guidelines for question generation:</p>
+                <ul>
+                    <li>CEFR A1-A2 English level (8th grade)</li>
+                    <li>Focus on Present Simple, Past Simple, "be going to", basic Modals</li>
+                    <li>Context-driven questions (dialogues, invitations, posters)</li>
+                    <li>LGS exam style (preferences and reasons)</li>
+                    <li>Distractor logic patterns</li>
+                </ul>
+                
+                <h4>TEXT_QUESTION_TEMPLATE</h4>
+                <p>Used for text-based questions:</p>
+                <ul>
+                    <li>Includes unit name, vocabulary glossary, example questions</li>
+                    <li>Instructs LLM to return JSON with passage, stem, options, answer</li>
+                    <li>Requests distractor explanations</li>
+                </ul>
+                
+                <h4>VISUAL_QUESTION_TEMPLATE</h4>
+                <p>Used for image-based questions:</p>
+                <ul>
+                    <li>Includes image_prompt field for image generation</li>
+                    <li>Same structure as text, but with visual context</li>
+                    <li>Image prompt describes what image to generate</li>
+                </ul>
+                
+                <h3>JSON Response Handling</h3>
+                <div class="highlight">
+                    <strong>Response Format:</strong>
+                    <p>LLM is configured to return JSON objects using <code>response_format={"type": "json_object"}</code></p>
+                    <p>Backend parses JSON string response and validates structure</p>
+                    <p>If parsing fails, question is skipped with error logging</p>
+                </div>
+            </section>
+            
+            <!-- IMAGE GENERATION SYSTEM -->
+            <section>
+                <h2>12. Image Generation System</h2>
+                
+                <h3>Current Implementation</h3>
+                <p>The image generation system is designed as a plug-and-play component:</p>
+                
+                <div class="architecture-box">
+                    <strong>Function: generate_image_from_prompt(image_prompt)</strong>
+                    <p>Located in: <code>backend/generate_exam.py</code></p>
+                    <ul>
+                        <li><strong>Input:</strong> Text description of image from LLM</li>
+                        <li><strong>Current Output:</strong> Placeholder URL ("/placeholder.svg")</li>
+                        <li><strong>Logging:</strong> Prints image prompts to console</li>
+                    </ul>
+                </div>
+                
+                <h3>Future Integration</h3>
+                <p>To integrate your image generation API:</p>
+                
+                <ol>
+                    <li>Update the <code>generate_image_from_prompt()</code> function</li>
+                    <li>Make API call to your image generation service</li>
+                    <li>Pass the image_prompt as parameter</li>
+                    <li>Return the generated image URL</li>
+                    <li>No other code changes needed</li>
+                </ol>
+                
+                <div class="info">
+                    <strong>Example Integration:</strong>
+                    <div class="code-block">
+async def generate_image_from_prompt(image_prompt: str) -> str:
+    response = await image_api.generate(prompt=image_prompt)
+    return response.image_url
+                    </div>
+                </div>
+                
+                <h3>Visual Question Distribution</h3>
+                <p>Visual questions are randomly distributed across topics:</p>
+                <ul>
+                    <li>User specifies total visual count in request</li>
+                    <li>Backend randomly assigns visual count to topics</li>
+                    <li>Within each topic, questions are randomly selected for visual rendering</li>
+                    <li>Ensures visual questions don't cluster on first questions</li>
+                </ul>
+            </section>
+            
+            <!-- PROGRESS TRACKING -->
+            <section>
+                <h2>13. Progress Tracking & UI Updates</h2>
+                
+                <h3>Frontend Progress Calculation</h3>
+                
+                <p>The progress bar and counter are based on <code>loadingCount</code> state:</p>
+                
+                <ul>
+                    <li><strong>loadingCount:</strong> Incremented each time a question arrives</li>
+                    <li><strong>totalQuestions:</strong> Sum of all counts in distribution</li>
+                    <li><strong>Progress %:</strong> (loadingCount / totalQuestions) * 100 (capped at 100%)</li>
+                </ul>
+                
+                <h3>Real-time Updates</h3>
+                <p>The UI updates in real-time as:</p>
+                <ol>
+                    <li>Each question line is parsed from NDJSON stream</li>
+                    <li>loadingCount increments immediately</li>
+                    <li>Progress bar and counter display update</li>
+                    <li>Question is sorted and added to questions array</li>
+                    <li>QuestionCard component renders question</li>
+                </ol>
+                
+                <h3>Loading States</h3>
+                <ul>
+                    <li><strong>Loading:</strong> Progress bar visible, "Sorular oluşturuluyor..." message</li>
+                    <li><strong>Complete:</strong> Progress bar hidden, "PDF İndir" button appears</li>
+                </ul>
+            </section>
+            
+            <!-- FILE STRUCTURE -->
+            <section>
+                <h2>14. Project File Structure</h2>
+                
+                <div class="code-block">
+LGS-LLM/
+├── backend/
+│   ├── generate_exam.py          # Main API endpoints
+│   ├── question_generator.py     # LLM integration & question generation
+│   ├── prompts.py                # LLM prompt templates
+│   ├── backup.py                 # Database backup utility
+│   ├── __pycache__/              # Python cache
+│   └── vocab/                    # Unit vocabulary files
+│       ├── Friendship_vocab.txt
+│       ├── Teen Life_vocab.txt
+│       ├── In The Kitchen_vocab.txt
+│       ├── On The Phone_vocab.txt
+│       ├── The Internet_vocab.txt
+│       ├── Adventures_vocab.txt
+│       ├── Tourism_vocab.txt
+│       ├── Chores_vocab.txt
+│       ├── Science_vocab.txt
+│       └── Natural Forces_vocab.txt
+│
+├── frontend/
+│   ├── app/
+│   │   ├── page.tsx              # Main entry page
+│   │   ├── layout.tsx            # Root layout
+│   │   └── globals.css           # Global styles
+│   ├── components/
+│   │   ├── exam-configurator.tsx # Topic selection UI
+│   │   ├── exam-workspace.tsx    # Streaming & display logic
+│   │   ├── question-card.tsx     # Individual question component
+│   │   └── ui/                   # Shadcn UI components
+│   ├── hooks/
+│   │   ├── use-mobile.ts         # Mobile detection hook
+│   │   └── use-toast.ts          # Toast notifications
+│   ├── lib/
+│   │   ├── mongodb.ts            # DB connection setup
+│   │   └── utils.ts              # Utility functions
+│   ├── package.json              # Dependencies
+│   ├── tsconfig.json             # TypeScript config
+│   └── next.config.mjs           # Next.js config
+│
+└── start_servers.ps1             # PowerShell script to start both servers
+                </div>
+            </section>
+            
+            <!-- DEPLOYMENT & SETUP -->
+            <section>
+                <h2>15. Setup & Deployment</h2>
+                
+                <h3>Prerequisites</h3>
+                <ul>
+                    <li>Python 3.9+</li>
+                    <li>Node.js 18+</li>
+                    <li>MongoDB Atlas account (or local MongoDB)</li>
+                    <li>Groq API key (from groq.com)</li>
+                </ul>
+                
+                <h3>Backend Setup</h3>
+                <ol>
+                    <li>Navigate to backend directory: <code>cd backend</code></li>
+                    <li>Install dependencies: <code>pip install -r requirements.txt</code></li>
+                    <li>Set environment variables:
+                        <ul>
+                            <li><code>GROQ_API_KEY</code> - Your Groq API key</li>
+                            <li><code>MONGO_URI</code> - MongoDB connection string (optional)</li>
+                        </ul>
+                    </li>
+                    <li>Start server: <code>python generate_exam.py</code></li>
+                    <li>Server runs on: <code>http://localhost:8000</code></li>
+                </ol>
+                
+                <h3>Frontend Setup</h3>
+                <ol>
+                    <li>Navigate to frontend directory: <code>cd frontend</code></li>
+                    <li>Install dependencies: <code>npm install</code> or <code>pnpm install</code></li>
+                    <li>Start development server: <code>npm run dev</code></li>
+                    <li>Application runs on: <code>http://localhost:3000</code></li>
+                </ol>
+                
+                <h3>Quick Start</h3>
+                <p>Run the provided PowerShell script to start both servers:</p>
+                <div class="code-block">
+.\start_servers.ps1
+                </div>
+            </section>
+            
+            <!-- FUTURE ENHANCEMENTS -->
+            <section>
+                <h2>16. Future Enhancements</h2>
+                
+                <div class="highlight">
+                    <strong>Planned Features:</strong>
+                    <ul>
+                        <li><strong>Image Generation Integration:</strong> Connect actual image generation API to replace placeholders</li>
+                        <li><strong>Question Caching:</strong> Cache generated questions to reduce API calls</li>
+                        <li><strong>User Authentication:</strong> Login system for student tracking</li>
+                        <li><strong>Progress Tracking:</strong> Save exam results and student performance metrics</li>
+                        <li><strong>Question Difficulty Levels:</strong> Ability to specify question difficulty (easy/medium/hard)</li>
+                        <li><strong>Custom Prompts:</strong> Allow teachers to customize question generation parameters</li>
+                        <li><strong>Batch Generation:</strong> Generate multiple exams at once</li>
+                        <li><strong>Analytics Dashboard:</strong> Statistics on generated questions and student performance</li>
+                        <li><strong>Multi-language Support:</strong> Extend to other language exams</li>
+                        <li><strong>Mobile App:</strong> Native mobile application for iOS/Android</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- TROUBLESHOOTING -->
+            <section>
+                <h2>17. Troubleshooting & Common Issues</h2>
+                
+                <h3>Backend Issues</h3>
+                
+                <h4>Port 8000 Already in Use</h4>
+                <div class="warning">
+                    <strong>Solution:</strong> Change port or kill existing process
+                    <div class="code-block">
+# Windows
+taskkill /F /IM python.exe
+
+# Linux/Mac
+lsof -ti:8000 | xargs kill -9
+                    </div>
+                </div>
+                
+                <h4>Groq API Key Not Found</h4>
+                <div class="warning">
+                    <strong>Solution:</strong> Set environment variable
+                    <div class="code-block">
+# Windows
+set GROQ_API_KEY=your_key_here
+
+# Linux/Mac
+export GROQ_API_KEY=your_key_here
+                    </div>
+                </div>
+                
+                <h4>MongoDB Connection Failed</h4>
+                <div class="warning">
+                    <strong>Solution:</strong> Check MongoDB URI and network access
+                    <ul>
+                        <li>Verify MongoDB Atlas connection string</li>
+                        <li>Check IP whitelist in MongoDB Atlas</li>
+                        <li>Ensure internet connection</li>
+                    </ul>
+                </div>
+                
+                <h3>Frontend Issues</h3>
+                
+                <h4>Questions Not Loading</h4>
+                <div class="warning">
+                    <strong>Solution:</strong> Check backend connection
+                    <ul>
+                        <li>Verify backend is running on http://localhost:8000</li>
+                        <li>Check browser console for network errors</li>
+                        <li>Clear browser cache and reload</li>
+                    </ul>
+                </div>
+                
+                <h4>Progress Bar Not Updating</h4>
+                <div class="warning">
+                    <strong>Solution:</strong> Progress uses loadingCount, ensure streaming is working
+                    <ul>
+                        <li>Open Network tab in DevTools</li>
+                        <li>Check /generate-exam request for data chunks</li>
+                        <li>Verify NDJSON format is correct</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- PERFORMANCE CONSIDERATIONS -->
+            <section>
+                <h2>18. Performance Considerations</h2>
+                
+                <h3>Optimization Strategies</h3>
+                
+                <ul>
+                    <li><strong>Question Caching:</strong> Database questions are fetched once and cached in memory</li>
+                    <li><strong>Streaming:</strong> NDJSON format allows progressive question display without waiting for all to generate</li>
+                    <li><strong>Async Processing:</strong> FastAPI's async/await enables concurrent requests</li>
+                    <li><strong>LLM Latency:</strong> Groq API averages 1-3 seconds per question generation</li>
+                </ul>
+                
+                <h3>Expected Generation Times</h3>
+                <table>
+                    <tr>
+                        <th>Number of Questions</th>
+                        <th>Estimated Time</th>
+                    </tr>
+                    <tr>
+                        <td>1-2 questions</td>
+                        <td>2-6 seconds</td>
+                    </tr>
+                    <tr>
+                        <td>5 questions (1 per topic)</td>
+                        <td>7-15 seconds</td>
+                    </tr>
+                    <tr>
+                        <td>10 questions</td>
+                        <td>12-30 seconds</td>
+                    </tr>
+                    <tr>
+                        <td>20+ questions</td>
+                        <td>30-60+ seconds</td>
+                    </tr>
+                </table>
+                
+                <h3>Database Performance</h3>
+                <ul>
+                    <li>MongoDB Atlas connection established on first request</li>
+                    <li>All 70 questions cached in memory after first fetch</li>
+                    <li>Subsequent requests use cached data (no database hits)</li>
+                </ul>
+            </section>
+            
+            <!-- SECURITY CONSIDERATIONS -->
+            <section>
+                <h2>19. Security Considerations</h2>
+                
+                <h3>Current Implementation</h3>
+                <ul>
+                    <li><strong>CORS enabled:</strong> Allows requests from any origin (for development)</li>
+                    <li><strong>No authentication:</strong> API endpoints are publicly accessible</li>
+                    <li><strong>API Keys:</strong> Stored in environment variables (not in code)</li>
+                </ul>
+                
+                <h3>Recommended for Production</h3>
+                <ul>
+                    <li>Restrict CORS to specific origins</li>
+                    <li>Implement API authentication/authorization</li>
+                    <li>Add rate limiting to prevent abuse</li>
+                    <li>Use HTTPS for all communications</li>
+                    <li>Implement input validation on all endpoints</li>
+                    <li>Add logging and monitoring</li>
+                    <li>Use secrets management for sensitive data</li>
+                </ul>
+            </section>
+            
+            <!-- CONCLUSION -->
+            <section>
+                <h2>20. Conclusion</h2>
+                
+                <p>The LGS-LLM project represents a modern approach to educational content generation, leveraging AI to create adaptive, high-quality exam questions. The system architecture is designed to be:</p>
+                
+                <ul>
+                    <li><strong>Scalable:</strong> Can handle multiple concurrent requests with async processing</li>
+                    <li><strong>Maintainable:</strong> Clear separation of concerns (frontend, backend, LLM)</li>
+                    <li><strong>Extensible:</strong> Easy to integrate new features (image generation, caching, etc.)</li>
+                    <li><strong>User-friendly:</strong> Intuitive interface with real-time feedback</li>
+                </ul>
+                
+                <div class="info">
+                    <strong>Key Achievement:</strong> Successfully integrated LLM-powered question generation with streaming delivery to create an interactive exam preparation tool that generates questions on-demand with proper pedagogical structure and distractor analysis.
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <p>LGS-LLM Comprehensive Report | Generated December 31, 2025</p>
+            <p>This project uses open-source components and integrates with Groq API for LLM services.</p>
+        </footer>
+    </div>
+</body>
+</html>
