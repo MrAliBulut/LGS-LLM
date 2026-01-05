@@ -278,7 +278,10 @@
                 <strong>Date Created:</strong> December 31, 2025
             </div>
             <div class="metadata-item">
-                <strong>Status:</strong> <span class="success">In Development</span>
+                <strong>Last Updated:</strong> January 1, 2026
+            </div>
+            <div class="metadata-item">
+                <strong>Status:</strong> <span class="success">Completed ✅</span>
             </div>
         </div>
         
@@ -293,9 +296,14 @@
                     <strong>Key Features:</strong>
                     <ul>
                         <li>AI-powered question generation using Groq's llama-3.3-70b-versatile model</li>
+                        <li>AI image generation with Chroma and Zimage models</li>
                         <li>Real-time streaming of generated questions to frontend</li>
                         <li>Support for text and visual (image-based) questions</li>
+                        <li>Priority generation: text questions first for faster initial display</li>
                         <li>Random distribution of visual questions across topics</li>
+                        <li>PDF export with two options: with images or text-only</li>
+                        <li>Per-session JSON logging with timestamps</li>
+                        <li>Categorized debug output ([DEBUG], [DEBUG IG], [WARNING], [ERROR])</li>
                         <li>MongoDB integration for storing reference questions and metadata</li>
                         <li>CEFR A1-A2 English level questions (8th grade standard)</li>
                         <li>10 distinct English learning units with specialized vocabulary</li>
@@ -334,11 +342,19 @@
                     </div>
                     <div class="tech-item">
                         <strong>Export Format</strong>
-                        PDF (jsPDF library)
+                        PDF (jsPDF + dom-to-image-more)
                     </div>
                     <div class="tech-item">
                         <strong>Communication</strong>
                         NDJSON (Newline Delimited JSON) for streaming
+                    </div>
+                    <div class="tech-item">
+                        <strong>Image Generation</strong>
+                        Chroma/Zimage AI Models
+                    </div>
+                    <div class="tech-item">
+                        <strong>Logging</strong>
+                        Per-session JSON logs
                     </div>
                 </div>
             </section>
@@ -365,8 +381,11 @@
                     <ul>
                         <li>HTTP endpoints for exam generation</li>
                         <li>LLM integration for question creation</li>
-                        <li>Image generation pipeline (placeholder ready)</li>
+                        <li>AI image generation with Chroma/Zimage models</li>
                         <li>Random distribution of visual questions</li>
+                        <li>Priority generation: text questions before visual</li>
+                        <li>Per-session JSON logging with timestamps</li>
+                        <li>Categorized debug output system</li>
                     </ul>
                 </div>
                 
@@ -504,7 +523,14 @@
                     <li>Handles NDJSON streaming with proper buffer management</li>
                     <li>Real-time progress tracking with loadingCount</li>
                     <li>Question sorting and display</li>
-                    <li>PDF export functionality</li>
+                    <li>PDF export with dropdown menu (two options):
+                        <ul>
+                            <li><strong>Görseller ile:</strong> Full visual PDF with images using dom-to-image-more</li>
+                            <li><strong>Görseller olmadan:</strong> Text-only PDF with jsPDF</li>
+                        </ul>
+                    </li>
+                    <li>Custom page height calculation to prevent content cutting</li>
+                    <li>Answer key automatically appended to PDF</li>
                 </ul>
                 
                 <h4>question-card.tsx</h4>
@@ -512,6 +538,7 @@
                 <ul>
                     <li>Supports both text and image-based questions</li>
                     <li>Handles LLM format (nested question.stem, question.options)</li>
+                    <li>Options format handling: supports both object {A:..., B:...} and array formats</li>
                     <li>Interactive answer selection</li>
                     <li>Answer reveal with distractor logic explanation</li>
                     <li>Displays passage and stem separately for readability</li>
@@ -910,36 +937,50 @@ Shows "PDF İndir" when all loaded
                 <h2>12. Image Generation System</h2>
                 
                 <h3>Current Implementation</h3>
-                <p>The image generation system is designed as a plug-and-play component:</p>
+                <p>The image generation system supports two AI models for generating educational illustrations:</p>
                 
                 <div class="architecture-box">
-                    <strong>Function: generate_image_from_prompt(image_prompt)</strong>
-                    <p>Located in: <code>backend/generate_exam.py</code></p>
+                    <strong>Chroma Model</strong>
+                    <p>Located in: <code>backend/image_generation/chroma_client.py</code></p>
                     <ul>
-                        <li><strong>Input:</strong> Text description of image from LLM</li>
-                        <li><strong>Current Output:</strong> Placeholder URL ("/placeholder.svg")</li>
-                        <li><strong>Logging:</strong> Prints image prompts to console</li>
+                        <li><strong>Type:</strong> High-quality educational illustration model</li>
+                        <li><strong>Features:</strong> Positive/negative prompt engineering</li>
+                        <li><strong>Parameters:</strong> Configurable seed, steps, guidance scale</li>
+                        <li><strong>Output:</strong> Base64-encoded image data</li>
                     </ul>
                 </div>
                 
-                <h3>Future Integration</h3>
-                <p>To integrate your image generation API:</p>
+                <div class="architecture-box">
+                    <strong>Zimage Model</strong>
+                    <p>Located in: <code>backend/image_generation/z_image_client.py</code></p>
+                    <ul>
+                        <li><strong>Type:</strong> Fast image generation model</li>
+                        <li><strong>Features:</strong> Single prompt approach</li>
+                        <li><strong>Parameters:</strong> Configurable dimensions</li>
+                        <li><strong>Output:</strong> Base64-encoded image data</li>
+                    </ul>
+                </div>
                 
-                <ol>
-                    <li>Update the <code>generate_image_from_prompt()</code> function</li>
-                    <li>Make API call to your image generation service</li>
-                    <li>Pass the image_prompt as parameter</li>
-                    <li>Return the generated image URL</li>
-                    <li>No other code changes needed</li>
-                </ol>
+                <h3>Prompt Engineering</h3>
+                <p>Each model has dedicated prompt engineering classes:</p>
                 
-                <div class="info">
-                    <strong>Example Integration:</strong>
-                    <div class="code-block">
-async def generate_image_from_prompt(image_prompt: str) -> str:
-    response = await image_api.generate(prompt=image_prompt)
-    return response.image_url
-                    </div>
+                <div class="code-block">
+# ChromaPromptEngine
+- Generates positive prompts (scene description)
+- Generates negative prompts (elements to avoid)
+- Optimized for educational illustrations
+
+# ZimagePromptEngine  
+- Single prompt generation
+- Optimized for the Zimage model style
+                </div>
+                
+                <h3>Configuration</h3>
+                <p>Set the image generation model in environment:</p>
+                <div class="code-block">
+IMAGE_GENERATION_MODEL=chroma  # or "zimage"
+CHROMA_API_URL=your_chroma_api_url
+ZIMAGE_API_URL=your_zimage_api_url
                 </div>
                 
                 <h3>Visual Question Distribution</h3>
@@ -950,6 +991,139 @@ async def generate_image_from_prompt(image_prompt: str) -> str:
                     <li>Within each topic, questions are randomly selected for visual rendering</li>
                     <li>Ensures visual questions don't cluster on first questions</li>
                 </ul>
+            </section>
+            
+            <!-- SESSION LOGGING SYSTEM -->
+            <section>
+                <h2>12.1 Session Logging System</h2>
+                
+                <h3>Overview</h3>
+                <p>Every exam generation request creates a comprehensive JSON log file for debugging and analytics.</p>
+                
+                <div class="architecture-box">
+                    <strong>SessionLogger Class</strong>
+                    <p>Located in: <code>backend/session_logger.py</code></p>
+                    <ul>
+                        <li><strong>Log Directory:</strong> <code>backend/logs/</code></li>
+                        <li><strong>Filename Format:</strong> <code>YYYY-MM-DD_HH-MM-SS-mmm.json</code></li>
+                        <li><strong>Auto-saves:</strong> After each logged event</li>
+                    </ul>
+                </div>
+                
+                <h3>Logged Information</h3>
+                <ul>
+                    <li><strong>Session metadata:</strong> Timestamp, distribution, visual count</li>
+                    <li><strong>Visual assignments:</strong> Which topics/indices get images</li>
+                    <li><strong>Generated questions:</strong> Full question data (without base64 images)</li>
+                    <li><strong>Image generation:</strong> Topic, index, prompt used</li>
+                    <li><strong>Errors:</strong> Any errors during generation</li>
+                    <li><strong>Completion status:</strong> Total questions generated</li>
+                </ul>
+                
+                <h3>Log File Structure</h3>
+                <div class="code-block">
+{
+  "session_id": "2026-01-01_18-30-45-123",
+  "timestamp": "2026-01-01T18:30:45.123456",
+  "distribution": {"Friendship": 2, "Science": 1},
+  "visual_count": 1,
+  "visual_indices": {"Friendship": [1]},
+  "questions": [...],
+  "images_generated": [...],
+  "errors": [],
+  "completed": true,
+  "total_questions": 3
+}
+                </div>
+                
+                <h3>Debug Print Categories</h3>
+                <p>Console output is categorized for easier debugging:</p>
+                <ul>
+                    <li><code>[DEBUG]</code> - General debug information</li>
+                    <li><code>[DEBUG IG]</code> - Image generation debug info</li>
+                    <li><code>[WARNING]</code> - Non-critical warnings</li>
+                    <li><code>[ERROR]</code> - Error messages</li>
+                </ul>
+            </section>
+            
+            <!-- PDF EXPORT SYSTEM -->
+            <section>
+                <h2>12.2 PDF Export System</h2>
+                
+                <h3>Export Options</h3>
+                <p>Users can download exams in two formats via a dropdown menu:</p>
+                
+                <div class="architecture-box">
+                    <strong>Görseller ile (With Images)</strong>
+                    <ul>
+                        <li>Captures full visual representation of exam</li>
+                        <li>Uses <code>dom-to-image-more</code> library for DOM screenshot</li>
+                        <li>Custom page height to fit all content without cutting</li>
+                        <li>Images and styling preserved exactly as shown</li>
+                        <li>Answer key appended on separate page</li>
+                    </ul>
+                </div>
+                
+                <div class="architecture-box">
+                    <strong>Görseller olmadan (Text Only)</strong>
+                    <ul>
+                        <li>Clean text-based PDF using jsPDF</li>
+                        <li>Questions formatted with proper typography</li>
+                        <li>Options listed A, B, C, D format</li>
+                        <li>Answer key appended at end</li>
+                        <li>Faster to generate, smaller file size</li>
+                    </ul>
+                </div>
+                
+                <h3>Technical Implementation</h3>
+                <div class="code-block">
+// DOM to Image capture (with images)
+const domtoimage = (await import("dom-to-image-more")).default;
+const dataUrl = await domtoimage.toPng(container, {
+  bgcolor: "#fff",
+  width: rect.width,
+  height: rect.height
+});
+
+// Custom page height to prevent content cutting
+const customPageHeight = imgHeight + 20;
+const pdf = new jsPDF({ format: [pageWidth, customPageHeight] });
+                </div>
+            </section>
+            
+            <!-- PRIORITY GENERATION -->
+            <section>
+                <h2>12.3 Priority Question Generation</h2>
+                
+                <h3>Overview</h3>
+                <p>Text questions are generated and streamed before visual questions for faster initial display.</p>
+                
+                <h3>How It Works</h3>
+                <ol>
+                    <li>Backend receives distribution with visual count</li>
+                    <li>Questions are sorted: text first (is_visual=False), visual last (is_visual=True)</li>
+                    <li>Text questions stream immediately to frontend</li>
+                    <li>Visual questions generate with images afterward</li>
+                    <li>User sees content faster while images process in background</li>
+                </ol>
+                
+                <h3>Performance Impact</h3>
+                <table>
+                    <tr>
+                        <th>Question Type</th>
+                        <th>Generation Time</th>
+                    </tr>
+                    <tr>
+                        <td>Text Question</td>
+                        <td>1-3 seconds</td>
+                    </tr>
+                    <tr>
+                        <td>Visual Question (with image)</td>
+                        <td>5-15 seconds</td>
+                    </tr>
+                </table>
+                
+                <p>By prioritizing text questions, users see initial results within seconds rather than waiting for image generation.</p>
             </section>
             
             <!-- PROGRESS TRACKING -->
@@ -993,8 +1167,18 @@ LGS-LLM/
 │   ├── generate_exam.py          # Main API endpoints
 │   ├── question_generator.py     # LLM integration & question generation
 │   ├── prompts.py                # LLM prompt templates
+│   ├── session_logger.py         # Per-session JSON logging system
 │   ├── backup.py                 # Database backup utility
+│   ├── requirements.txt          # Python dependencies
 │   ├── __pycache__/              # Python cache
+│   ├── logs/                     # Session log files (JSON)
+│   │   ├── 2026-01-01_18-30-45-123.json
+│   │   └── ...
+│   ├── image_generation/         # Image generation modules
+│   │   ├── generate_image.py     # Main image generation functions
+│   │   ├── image_prompts.py      # Prompt engineering for images
+│   │   ├── chroma_client.py      # Chroma API client
+│   │   └── z_image_client.py     # Zimage API client
 │   └── vocab/                    # Unit vocabulary files
 │       ├── Friendship_vocab.txt
 │       ├── Teen Life_vocab.txt
@@ -1014,9 +1198,11 @@ LGS-LLM/
 │   │   └── globals.css           # Global styles
 │   ├── components/
 │   │   ├── exam-configurator.tsx # Topic selection UI
-│   │   ├── exam-workspace.tsx    # Streaming & display logic
+│   │   ├── exam-workspace.tsx    # Streaming, display & PDF export
 │   │   ├── question-card.tsx     # Individual question component
 │   │   └── ui/                   # Shadcn UI components
+│   ├── types/
+│   │   └── dom-to-image-more.d.ts # TypeScript declarations
 │   ├── hooks/
 │   │   ├── use-mobile.ts         # Mobile detection hook
 │   │   └── use-toast.ts          # Toast notifications
@@ -1027,6 +1213,12 @@ LGS-LLM/
 │   ├── tsconfig.json             # TypeScript config
 │   └── next.config.mjs           # Next.js config
 │
+├── changelogs/                   # Development documentation
+│   ├── DEBUG_CATEGORIZATION.md   # Debug print system docs
+│   └── SESSION_LOGGING.md        # Session logging system docs
+│
+├── README.md                     # Project documentation
+├── PROJECT_REPORT.html           # This comprehensive report
 └── start_servers.ps1             # PowerShell script to start both servers
                 </div>
             </section>
@@ -1077,9 +1269,8 @@ LGS-LLM/
                 <h2>16. Future Enhancements</h2>
                 
                 <div class="highlight">
-                    <strong>Planned Features:</strong>
+                    <strong>Potential Features:</strong>
                     <ul>
-                        <li><strong>Image Generation Integration:</strong> Connect actual image generation API to replace placeholders</li>
                         <li><strong>Question Caching:</strong> Cache generated questions to reduce API calls</li>
                         <li><strong>User Authentication:</strong> Login system for student tracking</li>
                         <li><strong>Progress Tracking:</strong> Save exam results and student performance metrics</li>
@@ -1089,6 +1280,7 @@ LGS-LLM/
                         <li><strong>Analytics Dashboard:</strong> Statistics on generated questions and student performance</li>
                         <li><strong>Multi-language Support:</strong> Extend to other language exams</li>
                         <li><strong>Mobile App:</strong> Native mobile application for iOS/Android</li>
+                        <li><strong>Additional Image Models:</strong> Support for more AI image generation models</li>
                     </ul>
                 </div>
             </section>
@@ -1173,25 +1365,34 @@ export GROQ_API_KEY=your_key_here
                 <table>
                     <tr>
                         <th>Number of Questions</th>
-                        <th>Estimated Time</th>
+                        <th>Estimated Time (Text Only)</th>
+                        <th>Estimated Time (With Images)</th>
                     </tr>
                     <tr>
                         <td>1-2 questions</td>
                         <td>2-6 seconds</td>
+                        <td>7-20 seconds</td>
                     </tr>
                     <tr>
                         <td>5 questions (1 per topic)</td>
                         <td>7-15 seconds</td>
+                        <td>30-75 seconds</td>
                     </tr>
                     <tr>
                         <td>10 questions</td>
                         <td>12-30 seconds</td>
+                        <td>60-150 seconds</td>
                     </tr>
                     <tr>
                         <td>20+ questions</td>
                         <td>30-60+ seconds</td>
+                        <td>2-5+ minutes</td>
                     </tr>
                 </table>
+                
+                <div class="info">
+                    <strong>Priority Generation:</strong> Text questions are generated and displayed first, so users see initial results quickly while image generation continues in the background.
+                </div>
                 
                 <h3>Database Performance</h3>
                 <ul>
@@ -1232,20 +1433,30 @@ export GROQ_API_KEY=your_key_here
                 
                 <ul>
                     <li><strong>Scalable:</strong> Can handle multiple concurrent requests with async processing</li>
-                    <li><strong>Maintainable:</strong> Clear separation of concerns (frontend, backend, LLM)</li>
-                    <li><strong>Extensible:</strong> Easy to integrate new features (image generation, caching, etc.)</li>
+                    <li><strong>Maintainable:</strong> Clear separation of concerns (frontend, backend, LLM, image generation)</li>
+                    <li><strong>Extensible:</strong> Easy to integrate new features and AI models</li>
                     <li><strong>User-friendly:</strong> Intuitive interface with real-time feedback</li>
+                    <li><strong>Well-documented:</strong> Comprehensive logging and documentation</li>
                 </ul>
                 
                 <div class="info">
-                    <strong>Key Achievement:</strong> Successfully integrated LLM-powered question generation with streaming delivery to create an interactive exam preparation tool that generates questions on-demand with proper pedagogical structure and distractor analysis.
+                    <strong>Key Achievements:</strong>
+                    <ul>
+                        <li>Successfully integrated LLM-powered question generation with streaming delivery</li>
+                        <li>Implemented AI image generation with Chroma and Zimage models</li>
+                        <li>Created PDF export with two options (with/without images)</li>
+                        <li>Developed per-session logging system for debugging and analytics</li>
+                        <li>Optimized generation with text-first priority for faster initial display</li>
+                        <li>Built a complete exam preparation tool with pedagogical structure and distractor analysis</li>
+                    </ul>
                 </div>
             </section>
         </div>
         
         <footer>
-            <p>LGS-LLM Comprehensive Report | Generated December 31, 2025</p>
-            <p>This project uses open-source components and integrates with Groq API for LLM services.</p>
+            <p>LGS-LLM Comprehensive Report | Last Updated: January 1, 2026</p>
+            <p>Status: <strong>Completed ✅</strong></p>
+            <p>This project uses open-source components and integrates with Groq API for LLM services and Chroma/Zimage for image generation.</p>
         </footer>
     </div>
 </body>

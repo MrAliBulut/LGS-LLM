@@ -1,18 +1,31 @@
 # LGS-LLM: AI-Powered Exam Question Generator
 
-An intelligent exam generation system that creates custom English language questions for the Turkish national high school entrance exam (LGS) using advanced Large Language Models.
+An intelligent exam generation system that creates custom English language questions for the Turkish national high school entrance exam (LGS) using advanced Large Language Models and AI image generation.
 
 ## 🌟 Features
 
+### Core Features
 - **AI-Powered Question Generation** - Uses Groq's llama-3.3-70b-versatile model
+- **AI Image Generation** - Supports Chroma and Zimage models for visual questions
 - **Real-Time Streaming** - Questions stream to frontend as NDJSON for instant display
-- **Text & Visual Questions** - Support for both text-based and image-based questions
+- **Text & Visual Questions** - Full support for both text-based and image-based questions
 - **Smart Distribution** - Randomly distributes visual questions across topics
+- **Priority Generation** - Text questions generated first for faster initial display
+
+### Content Features
 - **10 English Units** - Friendship, Teen Life, Kitchen, Phone, Internet, Adventures, Tourism, Chores, Science, Natural Forces
 - **CEFR A1-A2 Level** - Proper 8th-grade English difficulty
-- **Progress Tracking** - Real-time progress bar with instant updates
-- **PDF Export** - Download generated exams as PDF
 - **Vocabulary Context** - Unit-specific vocabulary for accurate question generation
+
+### Export Features
+- **PDF Export with Images** - Full screenshot of exam with images (custom page height)
+- **PDF Export Text-Only** - Clean text-based PDF without images
+- **Answer Key** - Automatically appended to all PDF exports
+
+### Developer Features
+- **Session Logging** - Per-session JSON logs with timestamps
+- **Debug Categories** - Organized debug output ([DEBUG], [DEBUG IG], [WARNING], [ERROR])
+- **Prompt Engineering** - Customizable prompt templates for both text and visual questions
 
 ## 📋 Prerequisites
 
@@ -20,9 +33,12 @@ Before you begin, ensure you have the following installed:
 
 - **Python 3.9+** - [Download Python](https://www.python.org/downloads/)
 - **Node.js 18+** - [Download Node.js](https://nodejs.org/)
-- **Git** - [Download Git](https://git-scm.com/)
-- **MongoDB Atlas Account** - [Create Account](https://www.mongodb.com/cloud/atlas)
+- **pnpm** (recommended) - `npm install -g pnpm`
 - **Groq API Key** - [Get API Key](https://console.groq.com/keys)
+
+### Optional (for image generation)
+- **Chroma API** - For Chroma image generation model
+- **Zimage API** - For Zimage image generation model
 
 ## 🚀 Quick Start
 
@@ -59,13 +75,14 @@ pip install -r requirements.txt
 Create a `.env` file in the `backend` directory:
 
 ```env
+# Required
 GROQ_API_KEY=your_groq_api_key_here
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/
-```
 
-To get these:
-- **Groq API Key**: Visit [console.groq.com](https://console.groq.com/keys)
-- **MongoDB URI**: Go to MongoDB Atlas → Your Cluster → Connect → Drivers → Copy connection string
+# Image Generation (optional)
+IMAGE_GENERATION_MODEL=chroma  # or "zimage"
+CHROMA_API_URL=your_chroma_api_url
+ZIMAGE_API_URL=your_zimage_api_url
+```
 
 #### 2.4 Start Backend Server
 
@@ -75,7 +92,7 @@ python generate_exam.py
 
 The backend will start on `http://localhost:8000`
 
-You can verify it's working by visiting: `http://localhost:8000/health`
+Verify it's working: `http://localhost:8000/health`
 
 ### 3. Frontend Setup (New Terminal)
 
@@ -83,16 +100,12 @@ You can verify it's working by visiting: `http://localhost:8000/health`
 
 ```bash
 cd frontend
-npm install
-# or
 pnpm install
 ```
 
 #### 3.2 Start Frontend Development Server
 
 ```bash
-npm run dev
-# or
 pnpm dev
 ```
 
@@ -110,7 +123,7 @@ http://localhost:3000
 ### Quick Start (Easiest)
 1. Click **"Quick Start"** button on the home page
 2. This generates 1 question for each of the 10 topics
-3. Watch questions stream in real-time
+3. Watch questions stream in real-time (text questions first, then visual)
 4. Answer questions or click "Show Answer" for explanation
 5. Download exam as PDF when complete
 
@@ -122,6 +135,11 @@ http://localhost:3000
 5. Click **"Start Exam"**
 6. Questions will be generated and streamed to your screen
 
+### PDF Export Options
+When all questions are loaded, click **"PDF İndir"** to see options:
+- **Görseller ile** - Full visual PDF with images (single scrollable page + answer key)
+- **Görseller olmadan** - Text-only PDF with questions and answer key
+
 ## 🏗️ Project Structure
 
 ```
@@ -130,18 +148,34 @@ LGS-LLM/
 │   ├── generate_exam.py          # Main API server
 │   ├── question_generator.py     # LLM integration
 │   ├── prompts.py                # LLM prompt templates
-│   ├── requirements.txt           # Python dependencies
-│   └── vocab/                    # Vocabulary files (10 units)
+│   ├── session_logger.py         # Per-session logging system
+│   ├── requirements.txt          # Python dependencies
+│   ├── logs/                     # Session log files (JSON)
+│   ├── vocab/                    # Vocabulary files (10 units)
+│   └── image_generation/         # Image generation modules
+│       ├── generate_image.py     # Main image generation functions
+│       ├── image_prompts.py      # Prompt engineering for images
+│       ├── chroma_client.py      # Chroma API client
+│       └── z_image_client.py     # Zimage API client
 │
 ├── frontend/
 │   ├── app/                      # Next.js app directory
 │   ├── components/               # React components
+│   │   ├── exam-configurator.tsx # Topic selection UI
+│   │   ├── exam-workspace.tsx    # Question display & PDF export
+│   │   ├── question-card.tsx     # Individual question component
+│   │   └── ui/                   # Shadcn UI components
+│   ├── types/                    # TypeScript type definitions
 │   ├── package.json              # Node.js dependencies
 │   └── tsconfig.json             # TypeScript config
 │
-├── README.md                      # This file
-├── .gitignore                     # Git ignore rules
-└── PROJECT_REPORT.html           # Detailed technical report
+├── changelogs/                   # Development documentation
+│   ├── DEBUG_CATEGORIZATION.md   # Debug print system docs
+│   └── SESSION_LOGGING.md        # Session logging system docs
+│
+├── README.md                     # This file
+├── PROJECT_REPORT.html           # Detailed technical report
+└── start_servers.ps1             # PowerShell script to start both servers
 ```
 
 ## 🔧 API Endpoints
@@ -162,44 +196,29 @@ Content-Type: application/json
     "Teen Life": 1,
     ...
   },
-  "visualCount": 0
+  "visualCount": 2
 }
 ```
 
-**Response:** NDJSON stream of questions
+**Response:** NDJSON stream of questions (text questions first, then visual)
 
 ## 📦 Dependencies
 
 ### Backend (Python)
 - **FastAPI** - Modern web framework
 - **Uvicorn** - ASGI server
-- **Motor** - Async MongoDB driver
 - **Groq** - LLM API client
 - **Python-dotenv** - Environment variable management
-- **Pydantic** - Data validation
+- **httpx** - Async HTTP client for image generation
 
 ### Frontend (Node.js)
-- **Next.js** - React framework
-- **React** - UI library
+- **Next.js 16** - React framework
+- **React 19** - UI library
 - **TypeScript** - Type safety
 - **Tailwind CSS** - Styling
 - **Shadcn UI** - Component library
 - **jsPDF** - PDF generation
-
-## 🔐 Environment Variables
-
-### Backend (.env)
-
-```env
-# Required
-GROQ_API_KEY=your_groq_api_key
-
-# Optional (defaults to MongoDB Atlas)
-MONGO_URI=mongodb+srv://user:password@cluster.mongodb.net/database
-```
-
-### Frontend
-No environment variables needed for basic setup.
+- **dom-to-image-more** - DOM to image capture for PDF with images
 
 ## 📊 Supported Topics
 
@@ -216,13 +235,47 @@ No environment variables needed for basic setup.
 | 9 | Science | 18 | Science concepts |
 | 10 | Natural Forces | 15 | Natural phenomena |
 
+## 🖼️ Image Generation
+
+The system supports two image generation models:
+
+### Chroma Model
+- High-quality educational illustrations
+- Prompt engineering with positive/negative prompts
+- Configurable seed, steps, and guidance scale
+
+### Zimage Model
+- Fast image generation
+- Single prompt approach
+- Configurable dimensions and parameters
+
+Set the model in `.env`:
+```env
+IMAGE_GENERATION_MODEL=chroma  # or "zimage"
+```
+
+## 📝 Session Logging
+
+Every exam generation session creates a JSON log file in `backend/logs/`:
+
+```
+logs/
+├── 2026-01-01_18-30-45-123.json
+├── 2026-01-01_19-15-22-456.json
+└── ...
+```
+
+Each log contains:
+- Session timestamp and configuration
+- Distribution logic and visual assignments
+- All generated questions (without base64 image data)
+- Image generation metadata
+- Errors and completion status
+
 ## 🐛 Troubleshooting
 
 ### Backend won't start on port 8000
 
-**Issue:** "Port 8000 already in use"
-
-**Solution:**
 ```bash
 # Windows
 taskkill /F /IM python.exe
@@ -233,61 +286,52 @@ lsof -ti:8000 | xargs kill -9
 
 ### Groq API key not found
 
-**Issue:** "GROQ_API_KEY not configured"
-
-**Solution:**
 1. Make sure `.env` file exists in `backend/` directory
 2. Verify `GROQ_API_KEY=` is set correctly
 3. Restart the backend server
 
-### MongoDB connection failed
-
-**Issue:** "MongoDB connection failed"
-
-**Solution:**
-1. Verify MongoDB Atlas URI in `.env`
-2. Check IP whitelist in MongoDB Atlas dashboard
-3. Ensure internet connection is active
-4. Verify username and password are correct
-
 ### Frontend can't reach backend
 
-**Issue:** "Failed to fetch questions" or "API error"
-
-**Solution:**
 1. Verify backend is running: `http://localhost:8000/health`
 2. Check browser console for errors (F12)
 3. Clear browser cache and reload
-4. Restart both frontend and backend
+
+### PDF Export Issues
+
+- **"Görseller ile" not downloading**: Check browser console for errors
+- **Content cut off**: The system uses custom page heights to prevent cutting
 
 ## 📈 Performance
 
 **Question Generation Time:**
-- Single question: 1-3 seconds
-- 5 questions: 5-15 seconds
-- 10 questions: 10-30 seconds
-- 20+ questions: 30-60+ seconds
+- Text question: 1-3 seconds
+- Visual question: 5-15 seconds (includes image generation)
+- 10 text questions: 10-30 seconds
+- 10 visual questions: 50-150 seconds
 
-*Times vary based on Groq API load*
+*Text questions are prioritized and generated first for faster initial display*
 
 ## 🔄 How It Works
 
 1. **User selects topics & quantities** on frontend
 2. **Frontend sends POST request** to `/generate-exam` endpoint
-3. **Backend calculates visual distribution** (random allocation)
-4. **For each question:**
+3. **Backend creates session log** with timestamp
+4. **Backend calculates visual distribution** (random allocation)
+5. **Questions are sorted**: text first, visual last
+6. **For each question:**
    - Backend calls LLM to generate question
-   - LLM uses examples from database + vocabulary context
-   - If visual: extracts image prompt
+   - LLM uses vocabulary context and prompt templates
+   - If visual: generates image using Chroma/Zimage
    - Streams question to frontend as NDJSON
-5. **Frontend receives and displays:**
+   - Logs question to session file
+7. **Frontend receives and displays:**
    - Parses JSON line-by-line
    - Updates progress bar in real-time
    - Renders question using QuestionCard component
-6. **User can:**
+8. **User can:**
    - Answer questions
    - View explanations
-   - Download as PDF
+   - Download as PDF (with or without images)
 
 ## 🎓 Educational Standards
 
@@ -299,7 +343,7 @@ Questions are generated following:
 
 ## 📝 License
 
-This project is open source. Specify your license here.
+This project is open source.
 
 ## 🤝 Contributing
 
@@ -310,23 +354,10 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 For issues, questions, or suggestions:
 1. Check the [Troubleshooting](#-troubleshooting) section
 2. Review the detailed [PROJECT_REPORT.html](./PROJECT_REPORT.html)
-3. Open an issue on GitHub
-
-## 🚀 Deployment
-
-For production deployment:
-- Follow security recommendations in PROJECT_REPORT.html
-- Use environment variables for all sensitive data
-- Set up proper CORS policies
-- Implement rate limiting
-- Use HTTPS/SSL certificates
-- Set up monitoring and logging
-
-## 📞 Contact
-
-Your contact information here.
+3. Check changelogs in `changelogs/` directory
+4. Open an issue on GitHub
 
 ---
 
-**Last Updated:** December 31, 2025  
-**Status:** In Development ✨
+**Last Updated:** January 1, 2026  
+**Status:** Completed ✅

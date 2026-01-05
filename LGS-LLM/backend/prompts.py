@@ -58,11 +58,21 @@ Task: Create a visual-based LGS English question.
 **GLOSSARY:** {glossary}
 **REFERENCE EXAMPLES:** {examples}
 
+**IMAGE GENERATION CONSTRAINTS (CRITICAL):**
+Our image generation model (Chroma/Zimage) uses strict negative prompts. 
+1. NO TEXT: Do not include labels, speech bubbles, signs with words, or letters on clothing/buildings.
+2. NO NUMBERS: Do not include clocks, temperatures, or price tags.
+3. VISUAL CUES ONLY: If you want to show a character is "unhappy," describe their facial expression. If you want to show a "Library," describe bookshelves and students reading, NOT a sign that says "Library."
+4. STYLE: Describe scenes for a clean flat vector illustration with soft colors.
+
+**IMAGE PROMPT GUIDELINE:**
+The `image_prompt` should be 3-4 sentences. Focus on high-signal objects and clear actions that a student can identify without reading.
+
 Return the question in the following JSON format:
 {{
   "unit": "{unit_name}",
   "type": "visual",
-  "image_prompt": "INSERT DETAILED IMAGE DESCRIPTION HERE",
+  "image_prompt": "Describe the scene using ONLY visual elements. Ensure the prompt respects the NO TEXT/NO NUMBERS rule.",
   "question": {{
     "passage": "Optional text appearing near the image",
     "stem": "The question sentence based on the visual",

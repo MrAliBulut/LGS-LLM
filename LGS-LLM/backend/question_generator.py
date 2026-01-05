@@ -67,7 +67,7 @@ async def fetch_all_questions_from_db():
             }
             all_questions.append(question)
         
-        print(f"[DEBUG] Total questions fetched from database: {len(all_questions)}")
+        print(f"[DEBUG] RESULT: Fetched {len(all_questions)} questions from DB")
         return all_questions
 
     except Exception as e:
@@ -84,9 +84,7 @@ def group_questions_by_topic(questions):
             grouped[topic] = []
         grouped[topic].append(question)
     
-    print(f"[DEBUG] Grouped questions by topic:")
-    for topic, q_list in sorted(grouped.items()):
-        print(f"  - {topic}: {len(q_list)} questions")
+    print(f"[DEBUG] RESULT: Grouped {len(grouped)} topics")
     
     return grouped
 
@@ -112,7 +110,7 @@ async def load_examples_from_db(topic):
             return []
         
         examples = grouped[topic]
-        print(f"[DEBUG] Loaded {len(examples)} questions for topic '{topic}'")
+        print(f"[DEBUG] RESULT: Loaded {len(examples)} examples for '{topic}'")
         return examples
     
     except Exception as e:

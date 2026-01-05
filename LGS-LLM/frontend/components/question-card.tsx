@@ -40,7 +40,7 @@ export function QuestionCard({ question, index }: QuestionCardProps) {
   const isCorrect = selectedAnswer && selectedAnswer.startsWith(correctAnswer)
 
   return (
-    <Card className="overflow-hidden animate-fade-in-up shadow-sm hover:shadow-md transition-shadow">
+    <Card className="overflow-hidden animate-fade-in-up shadow-sm hover:shadow-md transition-shadow flex flex-col">
       <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/10 border-b">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -69,10 +69,10 @@ export function QuestionCard({ question, index }: QuestionCardProps) {
           </div>
         </div>
       </CardHeader>
-      <CardContent className="p-6 space-y-4">
+      <CardContent className={`space-y-4 flex flex-col flex-grow ${question.hasImage ? "p-4" : "p-6"}`}>
         {/* Image */}
         {question.hasImage && question.imageUrl && (
-          <div className="relative w-full h-56 bg-gradient-to-br from-muted to-accent/20 rounded-xl overflow-hidden border border-border">
+          <div className="relative w-full h-96 bg-gradient-to-br from-muted to-accent/20 rounded-xl overflow-hidden border border-border flex-shrink-0">
             {imageLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-muted/80 backdrop-blur-sm z-10">
                 <div className="text-center space-y-3">
@@ -85,7 +85,7 @@ export function QuestionCard({ question, index }: QuestionCardProps) {
               src={question.imageUrl || "/placeholder.svg"}
               alt="Soru görseli"
               fill
-              className="object-cover"
+              className="object-contain"
               onLoad={() => setImageLoading(false)}
             />
           </div>
